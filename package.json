@@ -6,7 +6,7 @@
   "copyright": "ITvisors (2020)",
   "author": "Johan Munneke",
   "config": {
-    "projectPath": "./Tests/",
+    "projectPath": "./test/",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },

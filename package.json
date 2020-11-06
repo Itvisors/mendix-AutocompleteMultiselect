@@ -25,6 +25,8 @@
     "@mendix/pluggable-widgets-tools": "^8.14.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "classnames": "^2.2.6"
   }
 }

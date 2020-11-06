@@ -1,0 +1,30 @@
+{
+  "name": "autocompletemultiselect",
+  "widgetName": "AutocompleteMultiselect",
+  "version": "1.0.0",
+  "description": "Auto complete widget where multiple options can be selected. Based on https://material-ui.com/components/autocomplete/",
+  "copyright": "ITvisors (2020)",
+  "author": "Johan Munneke",
+  "config": {
+    "projectPath": "./Tests/",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": "3000"
+  },
+  "packagePath": "itvisors",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "^8.14.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6"
+  }
+}

@@ -21,9 +21,8 @@ public class Book
 	public enum MemberNames
 	{
 		Title("Title"),
-		DefaultSelected("DefaultSelected"),
-		Book_Collection("MyFirstModule.Book_Collection"),
-		Book_Collection_Selected("MyFirstModule.Book_Collection_Selected");
+		Selected("Selected"),
+		Book_Collection("MyFirstModule.Book_Collection");
 
 		private java.lang.String metaName;
 
@@ -155,45 +154,45 @@ public class Book
 	}
 
 	/**
-	 * @return value of DefaultSelected
+	 * @return value of Selected
 	 */
-	public final java.lang.Boolean getDefaultSelected()
+	public final java.lang.Boolean getSelected()
 	{
-		return getDefaultSelected(getContext());
+		return getSelected(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of DefaultSelected
+	 * @return value of Selected
 	 */
-	public final java.lang.Boolean getDefaultSelected(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getSelected(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.DefaultSelected.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.Selected.toString());
 	}
 
 	/**
-	 * Set value of DefaultSelected
-	 * @param defaultselected
+	 * Set value of Selected
+	 * @param selected
 	 */
-	public final void setDefaultSelected(java.lang.Boolean defaultselected)
+	public final void setSelected(java.lang.Boolean selected)
 	{
-		setDefaultSelected(getContext(), defaultselected);
+		setSelected(getContext(), selected);
 	}
 
 	/**
-	 * Set value of DefaultSelected
+	 * Set value of Selected
 	 * @param context
-	 * @param defaultselected
+	 * @param selected
 	 */
-	public final void setDefaultSelected(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean defaultselected)
+	public final void setSelected(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean selected)
 	{
-		getMendixObject().setValue(context, MemberNames.DefaultSelected.toString(), defaultselected);
+		getMendixObject().setValue(context, MemberNames.Selected.toString(), selected);
 	}
 
 	/**
 	 * @return value of Book_Collection
 	 */
-	public final java.util.List<myfirstmodule.proxies.Collection> getBook_Collection() throws com.mendix.core.CoreException
+	public final myfirstmodule.proxies.Collection getBook_Collection() throws com.mendix.core.CoreException
 	{
 		return getBook_Collection(getContext());
 	}
@@ -202,15 +201,12 @@ public class Book
 	 * @param context
 	 * @return value of Book_Collection
 	 */
-	@SuppressWarnings("unchecked")
-	public final java.util.List<myfirstmodule.proxies.Collection> getBook_Collection(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	public final myfirstmodule.proxies.Collection getBook_Collection(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		java.util.List<myfirstmodule.proxies.Collection> result = new java.util.ArrayList<myfirstmodule.proxies.Collection>();
-		Object valueObject = getMendixObject().getValue(context, MemberNames.Book_Collection.toString());
-		if (valueObject == null)
-			return result;
-		for (com.mendix.systemwideinterfaces.core.IMendixObject mendixObject : com.mendix.core.Core.retrieveIdList(context, (java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier>) valueObject))
-			result.add(myfirstmodule.proxies.Collection.initialize(context, mendixObject));
+		myfirstmodule.proxies.Collection result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Book_Collection.toString());
+		if (identifier != null)
+			result = myfirstmodule.proxies.Collection.load(context, identifier);
 		return result;
 	}
 
@@ -218,7 +214,7 @@ public class Book
 	 * Set value of Book_Collection
 	 * @param book_collection
 	 */
-	public final void setBook_Collection(java.util.List<myfirstmodule.proxies.Collection> book_collection)
+	public final void setBook_Collection(myfirstmodule.proxies.Collection book_collection)
 	{
 		setBook_Collection(getContext(), book_collection);
 	}
@@ -228,55 +224,12 @@ public class Book
 	 * @param context
 	 * @param book_collection
 	 */
-	public final void setBook_Collection(com.mendix.systemwideinterfaces.core.IContext context, java.util.List<myfirstmodule.proxies.Collection> book_collection)
+	public final void setBook_Collection(com.mendix.systemwideinterfaces.core.IContext context, myfirstmodule.proxies.Collection book_collection)
 	{
-		java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier> identifiers = new java.util.ArrayList<com.mendix.systemwideinterfaces.core.IMendixIdentifier>();
-		for (myfirstmodule.proxies.Collection proxyObject : book_collection)
-			identifiers.add(proxyObject.getMendixObject().getId());
-		getMendixObject().setValue(context, MemberNames.Book_Collection.toString(), identifiers);
-	}
-
-	/**
-	 * @return value of Book_Collection_Selected
-	 */
-	public final myfirstmodule.proxies.Collection getBook_Collection_Selected() throws com.mendix.core.CoreException
-	{
-		return getBook_Collection_Selected(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of Book_Collection_Selected
-	 */
-	public final myfirstmodule.proxies.Collection getBook_Collection_Selected(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		myfirstmodule.proxies.Collection result = null;
-		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Book_Collection_Selected.toString());
-		if (identifier != null)
-			result = myfirstmodule.proxies.Collection.load(context, identifier);
-		return result;
-	}
-
-	/**
-	 * Set value of Book_Collection_Selected
-	 * @param book_collection_selected
-	 */
-	public final void setBook_Collection_Selected(myfirstmodule.proxies.Collection book_collection_selected)
-	{
-		setBook_Collection_Selected(getContext(), book_collection_selected);
-	}
-
-	/**
-	 * Set value of Book_Collection_Selected
-	 * @param context
-	 * @param book_collection_selected
-	 */
-	public final void setBook_Collection_Selected(com.mendix.systemwideinterfaces.core.IContext context, myfirstmodule.proxies.Collection book_collection_selected)
-	{
-		if (book_collection_selected == null)
-			getMendixObject().setValue(context, MemberNames.Book_Collection_Selected.toString(), null);
+		if (book_collection == null)
+			getMendixObject().setValue(context, MemberNames.Book_Collection.toString(), null);
 		else
-			getMendixObject().setValue(context, MemberNames.Book_Collection_Selected.toString(), book_collection_selected.getMendixObject().getId());
+			getMendixObject().setValue(context, MemberNames.Book_Collection.toString(), book_collection.getMendixObject().getId());
 	}
 
 	/**

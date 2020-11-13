@@ -9,6 +9,7 @@ export class AutocompleteUI extends Component {
     return <Autocomplete 
         key = {this.props.key}
         multiple = {this.props.multiple}
+        size="small"
         disabled = {this.props.disabled}
         disableCloseOnSelect = {this.props.disableCloseOnSelect}
         options = {this.props.options}
@@ -31,7 +32,6 @@ export class AutocompleteUI extends Component {
             variant={this.props.variant}
             label={this.props.label}
             placeholder={this.props.placeholder}
-            fullWidth
         />
         )}
 

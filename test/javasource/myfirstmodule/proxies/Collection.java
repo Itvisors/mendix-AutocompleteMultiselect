@@ -22,7 +22,7 @@ public class Collection
 	{
 		Name("Name"),
 		Reset("Reset"),
-		Book_Collection("MyFirstModule.Book_Collection");
+		Collection_Book("MyFirstModule.Collection_Book");
 
 		private java.lang.String metaName;
 
@@ -190,49 +190,46 @@ public class Collection
 	}
 
 	/**
-	 * @return value of Book_Collection
+	 * @return value of Collection_Book
 	 */
-	public final java.util.List<myfirstmodule.proxies.Book> getBook_Collection() throws com.mendix.core.CoreException
+	public final myfirstmodule.proxies.Book getCollection_Book() throws com.mendix.core.CoreException
 	{
-		return getBook_Collection(getContext());
+		return getCollection_Book(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of Book_Collection
+	 * @return value of Collection_Book
 	 */
-	@SuppressWarnings("unchecked")
-	public final java.util.List<myfirstmodule.proxies.Book> getBook_Collection(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	public final myfirstmodule.proxies.Book getCollection_Book(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		java.util.List<myfirstmodule.proxies.Book> result = new java.util.ArrayList<myfirstmodule.proxies.Book>();
-		Object valueObject = getMendixObject().getValue(context, MemberNames.Book_Collection.toString());
-		if (valueObject == null)
-			return result;
-		for (com.mendix.systemwideinterfaces.core.IMendixObject mendixObject : com.mendix.core.Core.retrieveIdList(context, (java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier>) valueObject))
-			result.add(myfirstmodule.proxies.Book.initialize(context, mendixObject));
+		myfirstmodule.proxies.Book result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Collection_Book.toString());
+		if (identifier != null)
+			result = myfirstmodule.proxies.Book.load(context, identifier);
 		return result;
 	}
 
 	/**
-	 * Set value of Book_Collection
-	 * @param book_collection
+	 * Set value of Collection_Book
+	 * @param collection_book
 	 */
-	public final void setBook_Collection(java.util.List<myfirstmodule.proxies.Book> book_collection)
+	public final void setCollection_Book(myfirstmodule.proxies.Book collection_book)
 	{
-		setBook_Collection(getContext(), book_collection);
+		setCollection_Book(getContext(), collection_book);
 	}
 
 	/**
-	 * Set value of Book_Collection
+	 * Set value of Collection_Book
 	 * @param context
-	 * @param book_collection
+	 * @param collection_book
 	 */
-	public final void setBook_Collection(com.mendix.systemwideinterfaces.core.IContext context, java.util.List<myfirstmodule.proxies.Book> book_collection)
+	public final void setCollection_Book(com.mendix.systemwideinterfaces.core.IContext context, myfirstmodule.proxies.Book collection_book)
 	{
-		java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier> identifiers = new java.util.ArrayList<com.mendix.systemwideinterfaces.core.IMendixIdentifier>();
-		for (myfirstmodule.proxies.Book proxyObject : book_collection)
-			identifiers.add(proxyObject.getMendixObject().getId());
-		getMendixObject().setValue(context, MemberNames.Book_Collection.toString(), identifiers);
+		if (collection_book == null)
+			getMendixObject().setValue(context, MemberNames.Collection_Book.toString(), null);
+		else
+			getMendixObject().setValue(context, MemberNames.Collection_Book.toString(), collection_book.getMendixObject().getId());
 	}
 
 	/**

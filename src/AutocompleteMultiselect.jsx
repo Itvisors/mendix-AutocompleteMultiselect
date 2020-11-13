@@ -81,9 +81,7 @@ export default class AutocompleteMultiselect extends Component {
             if (clearAllAction && clearAllAction.canExecute) {
                 clearAllAction.execute();
             }
-        } else {
-            console.log('test')
-        }
+        } 
     }
 
     render() {

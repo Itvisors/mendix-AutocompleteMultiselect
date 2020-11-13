@@ -1,10 +1,9 @@
-import { Component, createElement, Fragment } from "react";
+import { Component, createElement } from "react";
 
 import "./ui/AutocompleteMultiselect.css";
 
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import Checkbox from '@material-ui/core/Checkbox';
+import { AutocompleteUI } from './components/AutocompleteUI';
+
 
 export default class AutocompleteMultiselect extends Component {
     constructor(props) {
@@ -55,16 +54,36 @@ export default class AutocompleteMultiselect extends Component {
         }
     }
 
+    /**
+     * 
+     * @param {*} event - the event that triggered this action
+     * @param {*} newValue - the new value of the dropdown
+     * @param {*} reason - the reason that this action is triggered, either select-option, remove-option, create-option, blur or clear
+     * @param {*} details - more details about the option for which this event is triggered
+     */
     changeInput(event, newValue, reason, details) {
         if (reason === "select-option") {
-            const selectOptionAction = this.props.selectOptionAction(this.props.dataSourceOptions.items[details.option.index]);
-            if (selectOptionAction && selectOptionAction.canExecute) {
-                selectOptionAction.execute();
+            if (this.props.selectOptionAction) {
+                const selectOptionAction = this.props.selectOptionAction(this.props.dataSourceOptions.items[details.option.index]);
+                if (selectOptionAction.canExecute) {
+                    selectOptionAction.execute();
+                }
             }
+        } else if (reason === "remove-option") {
+            if (this.props.deselectOptionAction) {
+                const deselectOptionAction = this.props.deselectOptionAction(this.props.dataSourceOptions.items[details.option.index]);
+                if (deselectOptionAction.canExecute) {
+                    deselectOptionAction.execute();
+                }
+            }
+        } else if (reason === "clear") {
+            const clearAllAction = this.props.clearAllAction;
+            if (clearAllAction && clearAllAction.canExecute) {
+                clearAllAction.execute();
+            }
+        } else {
+            console.log('test')
         }
-        //remove-option
-        //blur
-        //called when a new value is selected or value(s) are deleted
     }
 
     render() {
@@ -74,34 +93,30 @@ export default class AutocompleteMultiselect extends Component {
         }
 
         //If the property is not filled, the widget will be editable
-        let disabled = this.props.editable ? !this.props.editable.value : false;
+        const disabled = this.props.editable ? !this.props.editable.value : false;
+        
+        const noOptionsText = this.props.noOptionsText ? this.props.noOptionsText.value : undefined;
 
-        return <Autocomplete 
-                key = {this.autoCompleteKey}
-                multiple = {true}
-                disabled = {disabled}
-                disableCloseOnSelect = {false}
-                options = {this.options}
-                defaultValue = {this.defaultOptions}
-                getOptionLabel = {option => option.title}
-                onChange = {this.onInputChange}
-                noOptionsText = {undefined}
-                limitTags={undefined}
-                renderOption={(option, { selected }) => (
-                    <Fragment>
-                      {false ? <Checkbox
-                        checked={selected}
-                      /> : null }
-                      {option.title}
-                    </Fragment>
-                  )}
-                renderInput={params => (
-                  <TextField
-                    {...params}
-                    fullWidth
-                  />
-                )}
+        const placeholder = this.props.placeholder ? this.props.placeholder.value : undefined;
 
+        const limitTags = this.props.limitTags > 0 ? this.props.limitTags : undefined;
+        
+        const label = this.props.label ? this.props.label.value : undefined;
+
+        return <AutocompleteUI 
+                    key = {this.autoCompleteKey}
+                    multiple = {this.props.multiple}
+                    disabled = {disabled}
+                    disableCloseOnSelect = {this.props.disableCloseOnSelect}
+                    options = {this.options}
+                    defaultValue = {this.defaultOptions}
+                    onChange = {this.onInputChange}
+                    noOptionsText = {noOptionsText}
+                    limitTags={limitTags}
+                    showCheckboxes = {this.props.showCheckboxes}
+                    variant={this.props.variant}
+                    label={label}
+                    placeholder={placeholder}
             />;
     }
 }

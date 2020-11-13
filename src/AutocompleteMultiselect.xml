@@ -34,7 +34,7 @@
                     <attributeType name="Boolean"/>
                 </attributeTypes>
             </property>
-            <property key="multiple" type="boolean" required="true" defaultValue="false">
+            <property key="multiple" type="boolean" required="true" defaultValue="true">
                 <caption>Multi-select</caption>
                 <description>If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select</description>
             </property>
@@ -77,7 +77,7 @@
             </property>
             <property key="label" type="textTemplate" required="false">
                 <caption>Label</caption>
-                <description>Label shown on top of the widget</description> 
+                <description>Other way to display the label, at the top of the widget</description> 
             </property>
             <property key="variant" type="enumeration" required="true" defaultValue="standard">
                 <caption>Variant</caption>
@@ -87,7 +87,7 @@
                     <enumerationValue key="outlined">outlined</enumerationValue>
                 </enumerationValues>
             </property>
-            <property key="showCheckoxes" type="boolean" required="true" defaultValue="false">
+            <property key="showCheckboxes" type="boolean" required="true" defaultValue="false">
                 <caption>Checkboxes</caption>
                 <description>Whether or not to show checkboxes in front of the options.</description>
             </property>

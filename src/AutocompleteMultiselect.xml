@@ -8,20 +8,92 @@
     <icon/>
     <properties>
         <propertyGroup caption="General">
+            <systemProperty key="Label" />
+            <systemProperty key="Visibility"/>
+            <property key="editable" type="expression" required="false">
+                <caption>Editable</caption>
+                <description>Whether or not the widget is ediable. If left empty, the widget will be editable.</description>
+                <returnType type="Boolean" />
+            </property>
+            <systemProperty key="Editability"/>
             <property key="dataSourceOptions" type="datasource" isList="true" required="true">
                 <caption>Data source</caption>
                 <description />
             </property>
             <property key="titleAttr" type="attribute" dataSource="dataSourceOptions" required="true">
                 <caption>Title</caption>
-                <description>Title attribute</description>
+                <description>String attribute where the title is stored to be shown in the dropdown</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
-            <property key="onChangeAction" type="action" required="false" dataSource="dataSourceOptions">
-                <caption>On Change Action</caption>
-                <description>Action to trigger when an option is selected or deselected.</description>
+            <property key="defaultSelectedAttr" type="attribute" dataSource="dataSourceOptions" required="false">
+                <caption>Default selected</caption>
+                <description>Boolean attribute where is stored whether this option should be selected by default when loading the widget for the first time</description>
+                <attributeTypes>
+                    <attributeType name="Boolean"/>
+                </attributeTypes>
+            </property>
+            <property key="multiple" type="boolean" required="true" defaultValue="false">
+                <caption>Multi-select</caption>
+                <description>If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select</description>
+            </property>
+            <property key="disableCloseOnSelect" type="boolean" required="true" defaultValue="false">
+                <caption>No close on select</caption>
+                <description>Whether or not to close the list when an item is selected. Set to true to not close the list when an item is selected.</description>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Events">
+            <property key="selectOptionAction" type="action" required="false" dataSource="dataSourceOptions">
+                <caption>Select option</caption>
+                <description>Action to trigger when an option is selected. This flow can have the context object and the object returned by the datasource as parameter.</description>
+            </property>
+            <property key="deselectOptionAction" type="action" required="false" dataSource="dataSourceOptions">
+                <caption>Deselect option</caption>
+                <description>Action to trigger when an option is deselected. This flow can have the context object and the object returned by the datasource as parameter.</description>
+            </property>
+            <property key="clearAllAction" type="action" required="false">
+                <caption>Clear all</caption>
+                <description>Action to trigger when the options are cleared(using the cross). This flow can have the context object as parameter.</description>
+            </property>
+            <property key="refreshAttribute" type="attribute" required="false">
+                <caption>Refresh</caption>
+                <description>Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got access rights.</description>
+                <attributeTypes>
+                    <attributeType name="Boolean"/>
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Layout">
+            <property key="noOptionsText" type="textTemplate" required="false">
+                <caption>No Options</caption>
+                <description>Text to show when no options found</description> 
+            </property>
+            <property key="placeholder" type="textTemplate" required="false">
+                <caption>Placeholder</caption>
+                <description>Default value as placeholder</description> 
+            </property>
+            <property key="label" type="textTemplate" required="false">
+                <caption>Label</caption>
+                <description>Label shown on top of the widget</description> 
+            </property>
+            <property key="variant" type="enumeration" required="true" defaultValue="standard">
+                <caption>Variant</caption>
+                <description>How the text field will be styled</description>
+                <enumerationValues>
+                    <enumerationValue key="standard">standard</enumerationValue>
+                    <enumerationValue key="outlined">outlined</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="showCheckoxes" type="boolean" required="true" defaultValue="false">
+                <caption>Checkboxes</caption>
+                <description>Whether or not to show checkboxes in front of the options.</description>
+            </property>
+            <property key="limitTags" type="integer" required="true" defaultValue="0">
+                <caption>Limit Tags</caption>
+                <description>Maximum number of selected tags to show if the dropdown is closed. If set to 0, there is no limit.</description>
             </property>
         </propertyGroup>
     </properties>

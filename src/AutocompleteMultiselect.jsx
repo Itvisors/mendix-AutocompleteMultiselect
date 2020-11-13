@@ -12,18 +12,54 @@ export default class AutocompleteMultiselect extends Component {
         this.state = {
             updateDate: null
         };
-        this.initialized = false;
         this.autoCompleteKey = 0;
         this.onInputChange = this.changeInput.bind(this);
         this.options = [];
-        this.defaultOptions = undefined;
+        this.defaultOptions = [];
+        this.initialized = false;
+    }
+
+    componentDidUpdate (prevProps) {
+        let refreshState = false;
+        // First check if the datasource has been loaded
+        if (this.props.dataSourceOptions.status === 'available') {
+            // If the items have been changed, change the options
+            if (this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
+                this.initialized = true;
+                let index = 0;
+                this.defaultOptions = [];
+                this.options = this.props.dataSourceOptions.items.map(item => {
+                    const option = {title: this.props.titleAttr(item).value, index: index};
+                    index++;
+                    // If widget is not yet initialized, get default options
+                    if (!this.initialized && this.props.defaultSelectedAttr(item).value) {
+                        this.defaultOptions.push(option);
+                    }
+                    return option;
+                })
+                refreshState = true;
+            }
+        }
+        // Refresh the data if the refreshAttribute has been set to true
+        if(this.props.refreshAttribute && !prevProps.refreshAttribute) {
+            if(this.props.refreshAttribute.value) {
+                this.props.refreshAttribute.setValue(false);
+                this.autoCompleteKey++;
+                this.initialized = false;
+                refreshState = true;
+            }
+        }
+
+        if (refreshState) {
+            this.setState({updateDate: new Date()});
+        }
     }
 
     changeInput(event, newValue, reason, details) {
         if (reason === "select-option") {
-            const onChangeAction = this.props.onChangeAction(this.props.dataSourceOptions.items[details.option.index]);
-            if (onChangeAction && onChangeAction.canExecute) {
-                onChangeAction.execute();
+            const selectOptionAction = this.props.selectOptionAction(this.props.dataSourceOptions.items[details.option.index]);
+            if (selectOptionAction && selectOptionAction.canExecute) {
+                selectOptionAction.execute();
             }
         }
         //remove-option
@@ -32,25 +68,21 @@ export default class AutocompleteMultiselect extends Component {
     }
 
     render() {
-        if (!this.initialized) {
-            if (this.props.dataSourceOptions.status === 'available') {
-                this.initialized = true;
-                let index = 0;
-                this.options = this.props.dataSourceOptions.items.map(item => {
-                    const option = {title: this.props.titleAttr(item).value, index: index};
-                    index++;
-                    return option;
-                })
-            }
+        //Do not render the widget if it is not initialized yet
+        if(!this.initialized) {
+            return ''
         }
+
+        //If the property is not filled, the widget will be editable
+        let disabled = this.props.editable ? !this.props.editable.value : false;
 
         return <Autocomplete 
                 key = {this.autoCompleteKey}
                 multiple = {true}
-                disabled = {false}
+                disabled = {disabled}
                 disableCloseOnSelect = {false}
                 options = {this.options}
-                defaultValue = {undefined}
+                defaultValue = {this.defaultOptions}
                 getOptionLabel = {option => option.title}
                 onChange = {this.onInputChange}
                 noOptionsText = {undefined}

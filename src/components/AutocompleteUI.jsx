@@ -14,9 +14,9 @@ export class AutocompleteUI extends Component {
         filterSelectedOptions = {this.props.filterSelectedOptions}
         disableCloseOnSelect = {this.props.disableCloseOnSelect}
         options = {this.props.options}
-        defaultValue = {this.props.defaultValue}
+        value = {this.props.value}
         getOptionLabel = {option => option.title}
-        onChange = {this.props.onInputChange}
+        onChange = {this.props.onChange}
         noOptionsText = {this.props.noOptionsText}
         limitTags={this.props.limitTags}
         renderOption={(option, { selected }) => (

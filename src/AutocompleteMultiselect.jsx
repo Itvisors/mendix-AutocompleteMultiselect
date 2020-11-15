@@ -14,7 +14,7 @@ export default class AutocompleteMultiselect extends Component {
         this.autoCompleteKey = 0;
         this.onInputChange = this.changeInput.bind(this);
         this.options = [];
-        this.defaultOptions = [];
+        this.optionsSelected = [];
         this.initialized = false;
     }
 
@@ -24,19 +24,18 @@ export default class AutocompleteMultiselect extends Component {
         if (this.props.dataSourceOptions.status === 'available') {
             // If the items have been changed, change the options
             if (this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
-                this.initialized = true;
                 let index = 0;
-                this.defaultOptions = [];
                 this.options = this.props.dataSourceOptions.items.map(item => {
                     const option = {title: this.props.titleAttr(item).value, index: index};
                     index++;
                     // If widget is not yet initialized, get default options
                     if (!this.initialized && this.props.defaultSelectedAttr(item).value) {
-                        this.defaultOptions.push(option);
+                        this.optionsSelected.push(option);
                     }
                     return option;
                 })
                 refreshState = true;
+                this.initialized = true;
             }
         }
         // Refresh the data if the refreshAttribute has been set to true
@@ -81,7 +80,9 @@ export default class AutocompleteMultiselect extends Component {
             if (clearAllAction && clearAllAction.canExecute) {
                 clearAllAction.execute();
             }
-        } 
+        }
+        this.optionsSelected = newValue;
+        this.setState({updateDate: new Date()}); 
     }
 
     render() {
@@ -107,7 +108,7 @@ export default class AutocompleteMultiselect extends Component {
                     disabled = {disabled}
                     disableCloseOnSelect = {this.props.disableCloseOnSelect}
                     options = {this.options}
-                    defaultValue = {this.defaultOptions}
+                    value = {this.optionsSelected}
                     onChange = {this.onInputChange}
                     noOptionsText = {noOptionsText}
                     limitTags={limitTags}

@@ -15,7 +15,6 @@
                 <description>Whether or not the widget is ediable. If left empty, the widget will be editable.</description>
                 <returnType type="Boolean" />
             </property>
-            <systemProperty key="Editability"/>
             <property key="dataSourceOptions" type="datasource" isList="true" required="true">
                 <caption>Data source</caption>
                 <description />
@@ -38,10 +37,6 @@
                 <caption>Multi-select</caption>
                 <description>If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select</description>
             </property>
-            <property key="disableCloseOnSelect" type="boolean" required="true" defaultValue="false">
-                <caption>No close on select</caption>
-                <description>Whether or not to close the list when an item is selected. Set to true to not close the list when an item is selected.</description>
-            </property>
         </propertyGroup>
 
         <propertyGroup caption="Events">
@@ -63,6 +58,21 @@
                 <attributeTypes>
                     <attributeType name="Boolean"/>
                 </attributeTypes>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Behavior">
+            <property key="disableCloseOnSelect" type="boolean" required="true" defaultValue="false">
+                <caption>No close on select</caption>
+                <description>Whether or not to close the list when an item is selected. Set to true to not close the list when an item is selected.</description>
+            </property>
+            <property key="filterSelectedOptions" type="boolean" required="true" defaultValue="false">
+                <caption>Filter selected options</caption>
+                <description>Whether or not to filter the options out of the list that are already selected.</description>
+            </property>
+            <property key="limitTags" type="integer" required="true" defaultValue="0">
+                <caption>Limit Tags</caption>
+                <description>Maximum number of selected tags to show if the dropdown is closed. If set to 0, there is no limit.</description>
             </property>
         </propertyGroup>
 
@@ -90,10 +100,6 @@
             <property key="showCheckboxes" type="boolean" required="true" defaultValue="false">
                 <caption>Checkboxes</caption>
                 <description>Whether or not to show checkboxes in front of the options.</description>
-            </property>
-            <property key="limitTags" type="integer" required="true" defaultValue="0">
-                <caption>Limit Tags</caption>
-                <description>Maximum number of selected tags to show if the dropdown is closed. If set to 0, there is no limit.</description>
             </property>
         </propertyGroup>
     </properties>

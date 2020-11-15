@@ -11,6 +11,7 @@ export class AutocompleteUI extends Component {
         multiple = {this.props.multiple}
         size="small"
         disabled = {this.props.disabled}
+        filterSelectedOptions = {this.props.filterSelectedOptions}
         disableCloseOnSelect = {this.props.disableCloseOnSelect}
         options = {this.props.options}
         defaultValue = {this.props.defaultValue}

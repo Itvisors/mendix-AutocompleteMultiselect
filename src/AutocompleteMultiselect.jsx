@@ -115,6 +115,7 @@ export default class AutocompleteMultiselect extends Component {
                     variant={this.props.variant}
                     label={label}
                     placeholder={placeholder}
+                    filterSelectedOptions={this.props.filterSelectedOptions}
             />;
     }
 }

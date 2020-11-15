@@ -75,15 +75,19 @@ export default class AutocompleteMultiselect extends Component {
      */
     changeInput(event, newValue, reason, details) {
         if (reason === "select-option") {
+            //does not yet work
+            const item = this.props.dataSourceOptions.items[details.option.index];
             if (this.props.selectOptionAction) {
-                const selectOptionAction = this.props.selectOptionAction(this.props.dataSourceOptions.items[details.option.index]);
+                const selectOptionAction = this.props.selectOptionAction.myListAction(item);
                 if (selectOptionAction.canExecute) {
                     selectOptionAction.execute();
                 }
             }
         } else if (reason === "remove-option") {
+            //does not yet work
+            const item = this.props.dataSourceOptions.items[details.option.index];
             if (this.props.deselectOptionAction) {
-                const deselectOptionAction = this.props.deselectOptionAction(this.props.dataSourceOptions.items[details.option.index]);
+                const deselectOptionAction = this.props.deselectOptionAction(item);
                 if (deselectOptionAction.canExecute) {
                     deselectOptionAction.execute();
                 }

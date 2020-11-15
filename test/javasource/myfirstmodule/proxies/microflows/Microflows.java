@@ -67,4 +67,11 @@ public class Microflows
 		}
 		return result;
 	}
+	public static void microflow(IContext context, myfirstmodule.proxies.Book _book, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Book", _book == null ? null : _book.getMendixObject());
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.Microflow").withParams(params).execute(context);
+	}
 }

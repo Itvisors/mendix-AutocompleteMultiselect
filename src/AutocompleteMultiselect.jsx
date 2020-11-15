@@ -16,35 +16,48 @@ export default class AutocompleteMultiselect extends Component {
         this.options = [];
         this.optionsSelected = [];
         this.initialized = false;
+        this.refreshData = true;
     }
 
     componentDidUpdate (prevProps) {
         let refreshState = false;
-        // First check if the datasource has been loaded
+
+        // Refresh the data if the refreshAttribute has been set to true
+        if(prevProps.refreshAttribute && this.props.refreshAttribute.value && !prevProps.refreshAttribute.value) {
+            this.props.refreshAttribute.setValue(false);
+            this.autoCompleteKey++;
+            this.refreshData = true;
+            refreshState = true;
+        }
+
+        // Check if the datasource has been loaded
         if (this.props.dataSourceOptions.status === 'available') {
-            // If the items have been changed, change the options
-            if (this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
+            // If the items have been changed or if date needs to be refreshed, change the options
+            if (this.refreshData ||
+                this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
                 let index = 0;
+                let optionsSelected = [];
                 this.options = this.props.dataSourceOptions.items.map(item => {
-                    const option = {title: this.props.titleAttr(item).value, index: index};
+                    const optionTitle = this.props.titleAttr(item).value;
+                    const option = {title: optionTitle, index: index};
                     index++;
-                    // If widget is not yet initialized, get default options
-                    if (!this.initialized && this.props.defaultSelectedAttr(item).value) {
-                        this.optionsSelected.push(option);
+                    // If data needs to be refreshed, get default options
+                    if (this.refreshData) {
+                        if (this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value) {
+                            optionsSelected.push(option);
+                        }
+                    } else {
+                        // Else check if option is selected
+                        if (this.optionsSelected.find(option => option.title === optionTitle)) {
+                            optionsSelected.push(option);
+                        }
                     }
                     return option;
                 })
                 refreshState = true;
                 this.initialized = true;
-            }
-        }
-        // Refresh the data if the refreshAttribute has been set to true
-        if(this.props.refreshAttribute && !prevProps.refreshAttribute) {
-            if(this.props.refreshAttribute.value) {
-                this.props.refreshAttribute.setValue(false);
-                this.autoCompleteKey++;
-                this.initialized = false;
-                refreshState = true;
+                this.refreshData = false;
+                this.optionsSelected = optionsSelected;
             }
         }
 

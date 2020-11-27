@@ -72,7 +72,7 @@
             </property>
             <property key="limitTags" type="integer" required="true" defaultValue="0">
                 <caption>Limit Tags</caption>
-                <description>Maximum number of selected tags to show if the dropdown is closed. If set to 0, there is no limit.</description>
+                <description>Maximum number of selected tags to show if the dropdown is closed. If more options are selected, there will be an indication how many options are selected (e.g. +2) If set to 0, there is no limit.</description>
             </property>
         </propertyGroup>
 
@@ -83,11 +83,11 @@
             </property>
             <property key="placeholder" type="textTemplate" required="false">
                 <caption>Placeholder</caption>
-                <description>Default value as placeholder</description> 
+                <description>Default value to show as placeholder</description> 
             </property>
             <property key="label" type="textTemplate" required="false">
                 <caption>Label</caption>
-                <description>Other way to display the label, at the top of the widget</description> 
+                <description>Other way to display the label, within the widget</description> 
             </property>
             <property key="variant" type="enumeration" required="true" defaultValue="standard">
                 <caption>Variant</caption>

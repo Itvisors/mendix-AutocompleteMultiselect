@@ -78,7 +78,7 @@ export default class AutocompleteMultiselect extends Component {
             //does not yet work
             const item = this.props.dataSourceOptions.items[details.option.index];
             if (this.props.selectOptionAction) {
-                const selectOptionAction = this.props.selectOptionAction.myListAction(item);
+                const selectOptionAction = this.props.selectOptionAction(item);
                 if (selectOptionAction.canExecute) {
                     selectOptionAction.execute();
                 }

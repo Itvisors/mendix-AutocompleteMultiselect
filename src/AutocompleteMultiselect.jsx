@@ -35,12 +35,10 @@ export default class AutocompleteMultiselect extends Component {
             // If the items have been changed or if date needs to be refreshed, change the options
             if (this.refreshData ||
                 this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
-                let index = 0;
                 let optionsSelected = [];
                 this.options = this.props.dataSourceOptions.items.map(item => {
                     const optionTitle = this.props.titleAttr(item).value;
-                    const option = {title: optionTitle, index: index};
-                    index++;
+                    const option = {title: optionTitle};
                     // If data needs to be refreshed, get default options
                     if (this.refreshData) {
                         if (this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value) {
@@ -67,6 +65,7 @@ export default class AutocompleteMultiselect extends Component {
     }
 
     /**
+     * Function called when a new value is selected or value(s) are deselected. 
      * 
      * @param {*} event - the event that triggered this action
      * @param {*} newValue - the new value of the dropdown
@@ -74,30 +73,17 @@ export default class AutocompleteMultiselect extends Component {
      * @param {*} details - more details about the option for which this event is triggered
      */
     changeInput(event, newValue, reason, details) {
-        if (reason === "select-option") {
-            //does not yet work
-            const item = this.props.dataSourceOptions.items[details.option.index];
-            if (this.props.selectOptionAction) {
-                const selectOptionAction = this.props.selectOptionAction(item);
-                if (selectOptionAction.canExecute) {
-                    selectOptionAction.execute();
-                }
-            }
-        } else if (reason === "remove-option") {
-            //does not yet work
-            const item = this.props.dataSourceOptions.items[details.option.index];
-            if (this.props.deselectOptionAction) {
-                const deselectOptionAction = this.props.deselectOptionAction(item);
-                if (deselectOptionAction.canExecute) {
-                    deselectOptionAction.execute();
-                }
-            }
-        } else if (reason === "clear") {
-            const clearAllAction = this.props.clearAllAction;
-            if (clearAllAction && clearAllAction.canExecute) {
-                clearAllAction.execute();
-            }
+        //Store response in responseAttribute and call on change action
+        if(this.props.responseAttribute.readOnly) {
+            console.warn('Autocomplete Multiselect: User has no rights to change the response attribute.')
+        } else {
+            this.props.responseAttribute.setValue(JSON.stringify(newValue));
         }
+        
+        if (this.props.onChangeAction && this.props.onChangeAction.canExecute) {
+            this.props.onChangeAction.execute();
+        }
+        //Update the widget with the new values selected
         this.optionsSelected = newValue;
         this.setState({updateDate: new Date()}); 
     }

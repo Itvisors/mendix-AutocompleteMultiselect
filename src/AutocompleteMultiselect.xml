@@ -40,17 +40,16 @@
         </propertyGroup>
 
         <propertyGroup caption="Events">
-            <property key="selectOptionAction" type="action" required="false" dataSource="dataSourceOptions">
-                <caption>Select option</caption>
-                <description>Action to trigger when an option is selected. This flow can have the context object and the object returned by the datasource as parameter.</description>
+            <property key="onChangeAction" type="action" required="false">
+                <caption>On Change Action</caption>
+                <description>Action to trigger when an option is selected or deselected.</description>
             </property>
-            <property key="deselectOptionAction" type="action" required="false" dataSource="dataSourceOptions">
-                <caption>Deselect option</caption>
-                <description>Action to trigger when an option is deselected. This flow can have the context object and the object returned by the datasource as parameter.</description>
-            </property>
-            <property key="clearAllAction" type="action" required="false">
-                <caption>Clear all</caption>
-                <description>Action to trigger when the options are cleared(using the cross). This flow can have the context object as parameter.</description>
+            <property key="responseAttribute" type="attribute" required="true">
+                <caption>Response</caption>
+                <description>Attribute where the selected items are stored in json format ([{"title":"example1"}]). User needs write access on this attribute.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
             </property>
             <property key="refreshAttribute" type="attribute" required="false">
                 <caption>Refresh</caption>

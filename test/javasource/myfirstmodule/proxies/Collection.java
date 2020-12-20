@@ -22,7 +22,7 @@ public class Collection
 	{
 		Name("Name"),
 		Reset("Reset"),
-		Collection_Book("MyFirstModule.Collection_Book");
+		Response("Response");
 
 		private java.lang.String metaName;
 
@@ -190,46 +190,39 @@ public class Collection
 	}
 
 	/**
-	 * @return value of Collection_Book
+	 * @return value of Response
 	 */
-	public final myfirstmodule.proxies.Book getCollection_Book() throws com.mendix.core.CoreException
+	public final java.lang.String getResponse()
 	{
-		return getCollection_Book(getContext());
+		return getResponse(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of Collection_Book
+	 * @return value of Response
 	 */
-	public final myfirstmodule.proxies.Book getCollection_Book(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	public final java.lang.String getResponse(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		myfirstmodule.proxies.Book result = null;
-		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Collection_Book.toString());
-		if (identifier != null)
-			result = myfirstmodule.proxies.Book.load(context, identifier);
-		return result;
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Response.toString());
 	}
 
 	/**
-	 * Set value of Collection_Book
-	 * @param collection_book
+	 * Set value of Response
+	 * @param response
 	 */
-	public final void setCollection_Book(myfirstmodule.proxies.Book collection_book)
+	public final void setResponse(java.lang.String response)
 	{
-		setCollection_Book(getContext(), collection_book);
+		setResponse(getContext(), response);
 	}
 
 	/**
-	 * Set value of Collection_Book
+	 * Set value of Response
 	 * @param context
-	 * @param collection_book
+	 * @param response
 	 */
-	public final void setCollection_Book(com.mendix.systemwideinterfaces.core.IContext context, myfirstmodule.proxies.Book collection_book)
+	public final void setResponse(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String response)
 	{
-		if (collection_book == null)
-			getMendixObject().setValue(context, MemberNames.Collection_Book.toString(), null);
-		else
-			getMendixObject().setValue(context, MemberNames.Collection_Book.toString(), collection_book.getMendixObject().getId());
+		getMendixObject().setValue(context, MemberNames.Response.toString(), response);
 	}
 
 	/**

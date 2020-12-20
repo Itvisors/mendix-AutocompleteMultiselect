@@ -15,31 +15,11 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 public class Microflows
 {
 	// These are the microflows for the MyFirstModule module
-	public static void aCT_Book_Deselect(IContext context, myfirstmodule.proxies.Book _book, myfirstmodule.proxies.Collection _collection)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Book", _book == null ? null : _book.getMendixObject());
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Book_Deselect").withParams(params).execute(context);
-	}
 	public static void aCT_Book_Save(IContext context, myfirstmodule.proxies.Book _book)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Book", _book == null ? null : _book.getMendixObject());
 		Core.microflowCall("MyFirstModule.ACT_Book_Save").withParams(params).execute(context);
-	}
-	public static void aCT_Book_Select(IContext context, myfirstmodule.proxies.Book _book, myfirstmodule.proxies.Collection _collection)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Book", _book == null ? null : _book.getMendixObject());
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Book_Select").withParams(params).execute(context);
-	}
-	public static void aCT_Collection_DeselectAll(IContext context, myfirstmodule.proxies.Collection _collection)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Collection_DeselectAll").withParams(params).execute(context);
 	}
 	public static void aCT_Collection_Reset(IContext context, myfirstmodule.proxies.Collection _collection)
 	{
@@ -72,5 +52,16 @@ public class Microflows
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Book", _book == null ? null : _book.getMendixObject());
 		Core.microflowCall("MyFirstModule.Microflow").withParams(params).execute(context);
+	}
+	public static void microflow_2(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		Core.microflowCall("MyFirstModule.Microflow_2").withParams(params).execute(context);
+	}
+	public static void oCH_Collection_SelectedBooks(IContext context, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.OCH_Collection_SelectedBooks").withParams(params).execute(context);
 	}
 }

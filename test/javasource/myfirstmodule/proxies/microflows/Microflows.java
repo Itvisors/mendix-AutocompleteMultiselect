@@ -53,11 +53,6 @@ public class Microflows
 		params.put("Book", _book == null ? null : _book.getMendixObject());
 		Core.microflowCall("MyFirstModule.Microflow").withParams(params).execute(context);
 	}
-	public static void microflow_2(IContext context)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("MyFirstModule.Microflow_2").withParams(params).execute(context);
-	}
 	public static void oCH_Collection_SelectedBooks(IContext context, myfirstmodule.proxies.Collection _collection)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();

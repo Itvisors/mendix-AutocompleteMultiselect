@@ -74,11 +74,7 @@ export default class AutocompleteMultiselect extends Component {
      */
     changeInput(event, newValue, reason, details) {
         //Store response in responseAttribute and call on change action
-        if(this.props.responseAttribute.readOnly) {
-            console.warn('Autocomplete Multiselect: User has no rights to change the response attribute.')
-        } else {
-            this.props.responseAttribute.setValue(JSON.stringify(newValue));
-        }
+        this.props.responseAttribute.setValue(JSON.stringify(newValue));
         
         if (this.props.onChangeAction && this.props.onChangeAction.canExecute) {
             this.props.onChangeAction.execute();
@@ -94,8 +90,13 @@ export default class AutocompleteMultiselect extends Component {
             return ''
         }
 
-        //If the property is not filled, the widget will be editable
-        const disabled = this.props.editable ? !this.props.editable.value : false;
+        //If the disabledproperty is not filled, the widget will be editable
+        let disabled = this.props.editable ? !this.props.editable.value : false;
+        //Check if user has rights on response attribute
+        if(!disabled && this.props.responseAttribute.readOnly) {
+            console.warn('Autocomplete Multiselect: User has no rights to change the response attribute.')
+            disabled = true;
+        }
         
         const noOptionsText = this.props.noOptionsText ? this.props.noOptionsText.value : undefined;
 

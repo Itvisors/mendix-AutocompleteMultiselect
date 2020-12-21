@@ -9,7 +9,7 @@ Widget that can be used to select one or many options from a dropdown. The user 
 - Styling options
 
 ## Usage
-This widget can be used with or without context object. Configure the data source to retrieve the options to show in the dropdown and select which attribute can be used as title. If you want some options to be selected when rendering the widget, also choose the attribute that can be used for the default selection property. Sometimes you need the options to be non-persistent, e.g. when the default selected attribute cannot be stored in the database. After these options are configured, the events can be setup that are triggered when options are (de)selected.
+The widget needs a context object to work, since the response has to be stored. You can choose to make this object non-persistent. Configure the data source to retrieve the options to show in the dropdown and select which attribute can be used as title. If you want some options to be selected when rendering the widget, also choose the attribute that can be used for the default selection property. Sometimes you need the options to be non-persistent, e.g. when the default selected attribute cannot be stored in the database. After these options are configured, the onchange event can be setup when needed and other options can be set that influence the behavior and layout of the widget. 
 
 ## Configuration
 ### General

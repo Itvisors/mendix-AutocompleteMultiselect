@@ -9,7 +9,7 @@ Widget that can be used to select one or many options from a dropdown. The user 
 - Styling options
 
 ## Usage
-The widget needs a context object to work, since the response has to be stored. You can choose to make this object non-persistent. Configure the data source to retrieve the options to show in the dropdown and select which attribute can be used as title. If you want some options to be selected when rendering the widget, also choose the attribute that can be used for the default selection property. Sometimes you need the options to be non-persistent, e.g. when the default selected attribute cannot be stored in the database. After these options are configured, the onchange event can be setup when needed and other options can be set that influence the behavior and layout of the widget. 
+The widget needs a context object to work, since the response has to be stored. You can choose to make this object non-persistent. Configure the data source to retrieve the options to show in the dropdown and select which attribute can be used as title. If you want some options to be selected when rendering the widget, also choose the attribute that can be used for the default selection property. Sometimes you need the options to be non-persistent, e.g. when the default selected attribute is user specific and can therefore not be stored in the database. After these options are configured, the onchange event can be setup when needed and other options can be set that influence the behavior and layout of the widget. When the value(s) in the dropdown are changed, the response attribute is set and can be used to do what you want, e.g. set an association. If "No close on select" is set to true, the onchange action is triggered many times in a short time and can interfere. Therefore it is adviced in this case to map the response only when needed, e.g. when hitting save.
 
 ## Configuration
 ### General
@@ -22,7 +22,7 @@ The widget needs a context object to work, since the response has to be stored. 
 
 ### Events
 - On Change Action: Action to trigger when an option is selected or deselected. Since this action is triggered for every change and this can happen quite fast if "No close on select" is set to true, it is wise to keep this action very short. If this combination is used, the response can best be mapped and used when e.g. saving the page or when the results are used.
-- Response: Attribute where the selected items are stored in json format ([{"title":"example1"}]). User needs write access on this attribute.
+- Response: Attribute where the selected items are stored in json format ([{"title":"example1"}] for multiselect and {"title":"example1"} for single select). User needs write access on this attribute.
 - Refresh: Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got access rights.
 
 

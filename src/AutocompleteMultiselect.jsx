@@ -27,7 +27,7 @@ export default class AutocompleteMultiselect extends Component {
             this.props.refreshAttribute.setValue(false);
             this.autoCompleteKey++;
             this.refreshData = true;
-            refreshState = true;
+            refreshState = true; 
         }
 
         // Check if the datasource has been loaded
@@ -35,14 +35,28 @@ export default class AutocompleteMultiselect extends Component {
             // If the items have been changed or if date needs to be refreshed, change the options
             if (this.refreshData ||
                 this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
-                let optionsSelected = [];
+                let warningGiven = false;
+                const multiSelect = this.props.multiple;
+                let optionsSelected = multiSelect ? [] : undefined;
+                const dataSourceOptions = this.props.dataSourceOptions.items; 
                 this.options = this.props.dataSourceOptions.items.map(item => {
                     const optionTitle = this.props.titleAttr(item).value;
                     const option = {title: optionTitle};
                     // If data needs to be refreshed, get default options
                     if (this.refreshData) {
                         if (this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value) {
-                            optionsSelected.push(option);
+                            if (multiSelect) {
+                                optionsSelected.push(option);
+                            } else {
+                                if (optionsSelected === undefined) {
+                                    optionsSelected = option;
+                                } else {
+                                    if (!warningGiven) {
+                                        console.warn("Autocomplete Multiselect: Multiple options are set as default for a single select. First option is set as the selected one.");
+                                        warningGiven = true;
+                                    }
+                                }
+                            }
                         }
                     } else {
                         // Else check if option is selected
@@ -56,6 +70,8 @@ export default class AutocompleteMultiselect extends Component {
                 this.initialized = true;
                 this.refreshData = false;
                 this.optionsSelected = optionsSelected;
+                //Store response in responseAttribute and call on change action
+                this.props.responseAttribute.setValue(JSON.stringify(optionsSelected));
             }
         }
 

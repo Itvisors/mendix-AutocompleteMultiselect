@@ -21,7 +21,7 @@ This widget can be used with or without context object. Configure the data sourc
 - Multi-select: If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select.
 
 ### Events
-- On Change Action: Action to trigger when an option is selected or deselected. Since this action for every change and this can happen quite fast if "No close on select" is set to true, it is wise to keep this action very short. If this combination is used, the response can best be mapped and used when e.g. saving the page or when the results are used.
+- On Change Action: Action to trigger when an option is selected or deselected. Since this action is triggered for every change and this can happen quite fast if "No close on select" is set to true, it is wise to keep this action very short. If this combination is used, the response can best be mapped and used when e.g. saving the page or when the results are used.
 - Response: Attribute where the selected items are stored in json format ([{"title":"example1"}]). User needs write access on this attribute.
 - Refresh: Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got access rights.
 

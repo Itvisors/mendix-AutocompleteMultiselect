@@ -41,7 +41,8 @@ export default class AutocompleteMultiselect extends Component {
                 let warningGiven = false;
                 const multiSelect = this.props.multiple;
                 let optionsSelected = multiSelect ? [] : null;
-                const dataSourceOptions = this.props.dataSourceOptions.items; 
+                
+                // Map the options and get the selected ones
                 this.options = this.props.dataSourceOptions.items.map(item => {
                     const optionTitle = this.props.titleAttr(item).value;
                     const option = {title: optionTitle};
@@ -109,7 +110,7 @@ export default class AutocompleteMultiselect extends Component {
             return ''
         }
 
-        // If the disabledproperty is not filled, the widget will be editable
+        // If the disabled property is not filled, the widget will be editable
         let disabled = this.props.editable ? !this.props.editable.value : false;
         // Check if user has rights on response attribute
         if(!disabled && this.props.responseAttribute.readOnly) {

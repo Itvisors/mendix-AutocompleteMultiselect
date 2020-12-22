@@ -40,7 +40,7 @@ export default class AutocompleteMultiselect extends Component {
                 this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
                 let warningGiven = false;
                 const multiSelect = this.props.multiple;
-                let optionsSelected = multiSelect ? [] : undefined;
+                let optionsSelected = multiSelect ? [] : null;
                 const dataSourceOptions = this.props.dataSourceOptions.items; 
                 this.options = this.props.dataSourceOptions.items.map(item => {
                     const optionTitle = this.props.titleAttr(item).value;
@@ -51,7 +51,7 @@ export default class AutocompleteMultiselect extends Component {
                             if (multiSelect) {
                                 optionsSelected.push(option);
                             } else {
-                                if (optionsSelected === undefined) {
+                                if (optionsSelected === null) {
                                     optionsSelected = option;
                                 } else {
                                     if (!warningGiven) {

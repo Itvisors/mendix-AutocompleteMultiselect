@@ -43,7 +43,7 @@
             <property key="onChangeAction" type="action" required="false">
                 <caption>On Change Action</caption>
                 <description>Action to trigger when an option is selected or deselected. 
-                Since this action is triggered for every change and this can happen quite fast if "No close on select" is set to true, it is wise to keep this action very short. If this combination is used, the response can best be mapped and used when used e.g. on save.</description>
+                Since this action is triggered for every change and this can happen quite fast if "No close on select" is set to true, it is wise to keep this action very short. If this combination is used, the response can best be mapped when used e.g. on save.</description>
             </property>
             <property key="responseAttribute" type="attribute" required="true">
                 <caption>Response</caption>

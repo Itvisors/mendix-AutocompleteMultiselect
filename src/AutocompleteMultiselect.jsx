@@ -16,6 +16,8 @@ export default class AutocompleteMultiselect extends Component {
         this.options = [];
         this.optionsSelected = [];
         this.initialized = false;
+
+        // Initialize to true to make sure data is retrieved when initializing widget
         this.refreshData = true;
     }
 
@@ -26,6 +28,7 @@ export default class AutocompleteMultiselect extends Component {
         if(prevProps.refreshAttribute && this.props.refreshAttribute.value && !prevProps.refreshAttribute.value) {
             this.props.refreshAttribute.setValue(false);
             this.autoCompleteKey++;
+            // Make sure data and state will be refreshed
             this.refreshData = true;
             refreshState = true; 
         }
@@ -70,7 +73,7 @@ export default class AutocompleteMultiselect extends Component {
                 this.initialized = true;
                 this.refreshData = false;
                 this.optionsSelected = optionsSelected;
-                //Store response in responseAttribute and call on change action
+                // Store response in responseAttribute and call on change action
                 this.props.responseAttribute.setValue(JSON.stringify(optionsSelected));
             }
         }
@@ -89,26 +92,26 @@ export default class AutocompleteMultiselect extends Component {
      * @param {*} details - more details about the option for which this event is triggered
      */
     changeInput(event, newValue, reason, details) {
-        //Store response in responseAttribute and call on change action
+        // Store response in responseAttribute and call on change action
         this.props.responseAttribute.setValue(JSON.stringify(newValue));
         
         if (this.props.onChangeAction && this.props.onChangeAction.canExecute) {
             this.props.onChangeAction.execute();
         }
-        //Update the widget with the new values selected
+        // Update the widget with the new values selected
         this.optionsSelected = newValue;
         this.setState({updateDate: new Date()}); 
     }
 
     render() {
-        //Do not render the widget if it is not initialized yet
+        // Do not render the widget if it is not initialized yet
         if(!this.initialized) {
             return ''
         }
 
-        //If the disabledproperty is not filled, the widget will be editable
+        // If the disabledproperty is not filled, the widget will be editable
         let disabled = this.props.editable ? !this.props.editable.value : false;
-        //Check if user has rights on response attribute
+        // Check if user has rights on response attribute
         if(!disabled && this.props.responseAttribute.readOnly) {
             console.warn('Autocomplete Multiselect: User has no rights to change the response attribute.')
             disabled = true;

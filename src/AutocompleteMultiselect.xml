@@ -47,7 +47,7 @@
             </property>
             <property key="responseAttribute" type="attribute" required="true">
                 <caption>Response</caption>
-                <description>Attribute where the selected items are stored in json format ([{"title":"example1"}]). User needs write access on this attribute.</description>
+                <description>Attribute where the selected items are stored in json format ([{"title":"example1"}] for multiselect and {"title":"example1"} for single select). User needs write access on this attribute.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>

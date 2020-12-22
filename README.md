@@ -21,9 +21,9 @@ The widget needs a context object to work to be able to store the response. You 
 - Multi-select: If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select.
 
 ### Events
-- On Change Action: Action to trigger when an option is selected or deselected. Since this action is triggered for every change and this can happen quite fast if "No close on select" is set to true, it is wise to keep this action very short. If this combination is used, the response can best be mapped and used when e.g. saving the page or when the results are used.
+- On Change Action: Action to trigger when an option is selected or deselected. Since this action is triggered for every change and this can happen quite fast if "No close on select" is set to true, it is wise to keep this action very short. If this combination is used, the response can best be mapped and used when used e.g. on save.
 - Response: Attribute where the selected items are stored in json format ([{"title":"example1"}] for multiselect and {"title":"example1"} for single select). User needs write access on this attribute.
-- Refresh: Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got access rights.
+- Refresh: Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got write access.
 
 
 ### Behavior

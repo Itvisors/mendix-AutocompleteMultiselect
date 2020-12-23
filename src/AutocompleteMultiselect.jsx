@@ -74,7 +74,7 @@ export default class AutocompleteMultiselect extends Component {
                 this.initialized = true;
                 this.refreshData = false;
                 this.optionsSelected = optionsSelected;
-                // Store response in responseAttribute and call on change action
+                // Store response in responseAttribute
                 this.props.responseAttribute.setValue(JSON.stringify(optionsSelected));
             }
         }

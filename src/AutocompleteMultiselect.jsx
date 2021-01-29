@@ -14,7 +14,7 @@ export default class AutocompleteMultiselect extends Component {
         this.autoCompleteKey = 0;
         this.onInputChange = this.changeInput.bind(this);
         this.options = [];
-        this.optionsSelected = [];
+        this.optionsSelected = []; // Array for multiselect, otherwise object
         this.initialized = false;
 
         // Initialize to true to make sure data is retrieved when initializing widget
@@ -64,8 +64,14 @@ export default class AutocompleteMultiselect extends Component {
                         }
                     } else {
                         // Else check if option is selected
-                        if (this.optionsSelected.find(option => option.title === optionTitle)) {
-                            optionsSelected.push(option);
+                        if (multiSelect) {
+                            if (this.optionsSelected.find(option => option.title === optionTitle)) {
+                                optionsSelected.push(option);
+                            }
+                        } else if (this.optionsSelected !== null) {
+                            if (this.optionsSelected.title === optionTitle) {
+                                optionsSelected = option;
+                            }
                         }
                     }
                     return option;

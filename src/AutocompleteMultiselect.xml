@@ -21,9 +21,17 @@
             </property>
             <property key="titleAttr" type="attribute" dataSource="dataSourceOptions" required="true">
                 <caption>Title</caption>
-                <description>String attribute where the title is stored to be shown in the dropdown</description>
+                <description>String attribute where the title is stored to be shown in the dropdown. Should be unique to be able to make a distinction between the items.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="keyAttr" type="attribute" dataSource="dataSourceOptions" required="false">
+                <caption>Key</caption>
+                <description>Optional: Attribute where the key is stored. This key is only used in the response and can be used when the title does not suffice to find the object in mendix. The new JSON will be for example [{"title":"example1", "key":"1234"}] for multiselect when a string key is used.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                    <attributeType name="Integer"/>
                 </attributeTypes>
             </property>
             <property key="defaultSelectedAttr" type="attribute" dataSource="dataSourceOptions" required="false">

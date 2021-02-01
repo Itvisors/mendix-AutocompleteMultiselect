@@ -22,6 +22,8 @@ public class Book
 	{
 		Title("Title"),
 		Selected("Selected"),
+		KeyString("KeyString"),
+		KeyInteger("KeyInteger"),
 		Book_Collection("MyFirstModule.Book_Collection");
 
 		private java.lang.String metaName;
@@ -187,6 +189,78 @@ public class Book
 	public final void setSelected(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean selected)
 	{
 		getMendixObject().setValue(context, MemberNames.Selected.toString(), selected);
+	}
+
+	/**
+	 * @return value of KeyString
+	 */
+	public final java.lang.String getKeyString()
+	{
+		return getKeyString(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of KeyString
+	 */
+	public final java.lang.String getKeyString(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.KeyString.toString());
+	}
+
+	/**
+	 * Set value of KeyString
+	 * @param keystring
+	 */
+	public final void setKeyString(java.lang.String keystring)
+	{
+		setKeyString(getContext(), keystring);
+	}
+
+	/**
+	 * Set value of KeyString
+	 * @param context
+	 * @param keystring
+	 */
+	public final void setKeyString(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String keystring)
+	{
+		getMendixObject().setValue(context, MemberNames.KeyString.toString(), keystring);
+	}
+
+	/**
+	 * @return value of KeyInteger
+	 */
+	public final java.lang.Integer getKeyInteger()
+	{
+		return getKeyInteger(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of KeyInteger
+	 */
+	public final java.lang.Integer getKeyInteger(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.KeyInteger.toString());
+	}
+
+	/**
+	 * Set value of KeyInteger
+	 * @param keyinteger
+	 */
+	public final void setKeyInteger(java.lang.Integer keyinteger)
+	{
+		setKeyInteger(getContext(), keyinteger);
+	}
+
+	/**
+	 * Set value of KeyInteger
+	 * @param context
+	 * @param keyinteger
+	 */
+	public final void setKeyInteger(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer keyinteger)
+	{
+		getMendixObject().setValue(context, MemberNames.KeyInteger.toString(), keyinteger);
 	}
 
 	/**

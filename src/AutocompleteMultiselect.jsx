@@ -46,6 +46,10 @@ export default class AutocompleteMultiselect extends Component {
                 this.options = this.props.dataSourceOptions.items.map(item => {
                     const optionTitle = this.props.titleAttr(item).value;
                     const option = {title: optionTitle};
+                    //If key is used, add key to the option
+                    if (this.props.keyAttr) {
+                        option.key = this.props.keyAttr(item).value;
+                    }
                     // If data needs to be refreshed, get default options
                     if (this.refreshData) {
                         if (this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value) {
@@ -63,7 +67,7 @@ export default class AutocompleteMultiselect extends Component {
                             }
                         }
                     } else {
-                        // Else check if option is selected
+                        // Else check if option is selected (based on the title). This is done since it can be the case that the options have been changed.
                         if (multiSelect) {
                             if (this.optionsSelected.find(option => option.title === optionTitle)) {
                                 optionsSelected.push(option);

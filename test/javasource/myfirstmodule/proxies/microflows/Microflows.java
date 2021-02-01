@@ -21,6 +21,18 @@ public class Microflows
 		params.put("Book", _book == null ? null : _book.getMendixObject());
 		Core.microflowCall("MyFirstModule.ACT_Book_Save").withParams(params).execute(context);
 	}
+	public static void aCT_Collection_MapIntKey(IContext context, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.ACT_Collection_MapIntKey").withParams(params).execute(context);
+	}
+	public static void aCT_Collection_MapStringKey(IContext context, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.ACT_Collection_MapStringKey").withParams(params).execute(context);
+	}
 	public static void aCT_Collection_Reset(IContext context, myfirstmodule.proxies.Collection _collection)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();

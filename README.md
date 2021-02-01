@@ -16,7 +16,8 @@ The widget needs a context object to work to be able to store the response. You 
 - Default mendix behavior for labeling and visibility.
 - Editable: Expression that can be used to indicate whether the widget is editable or not. If left empty, the widget will be editable.
 - Data source: Should return the options to be rendered.
-- Title: The attribute that is used to show as dropdown option.
+- Title: The attribute that is used to show as dropdown option. Should be unique to be able to make a distinction between the items.
+- Key: Attribute where the key is stored. This key is only used in the response and can be used when the title does not suffice to find the object in mendix. The new JSON will be for example [{"title":"example1", "key":"1234"}] for multiselect when a string key is used.
 - Default selected: Boolean attribute where is stored whether this option should be selected by default when loading the widget for the first time.
 - Multi-select: If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select.
 

@@ -65,6 +65,12 @@ public class Microflows
 		}
 		return result;
 	}
+	public static void oCH_Collection_Refresh(IContext context, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.OCH_Collection_Refresh").withParams(params).execute(context);
+	}
 	public static void oCH_Collection_SetSelectedBooks(IContext context, myfirstmodule.proxies.Collection _collection)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();

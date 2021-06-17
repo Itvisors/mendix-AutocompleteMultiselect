@@ -62,7 +62,7 @@
             </property>
             <property key="refreshAttribute" type="attribute" required="false">
                 <caption>Refresh</caption>
-                <description>Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got write access.</description>
+                <description>Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got write access. Widget will only be reset when the context object is refreshed.</description>
                 <attributeTypes>
                     <attributeType name="Boolean"/>
                 </attributeTypes>

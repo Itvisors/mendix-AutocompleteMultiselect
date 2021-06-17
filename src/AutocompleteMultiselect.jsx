@@ -34,58 +34,60 @@ export default class AutocompleteMultiselect extends Component {
         }
 
         // Check if the datasource has been loaded
-        if (this.props.dataSourceOptions.status === 'available') {
-            // If the items have been changed or if date needs to be refreshed, change the options
-            if (this.refreshData ||
-                this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
-                let warningGiven = false;
-                const multiSelect = this.props.multiple;
-                let optionsSelected = multiSelect ? [] : null;
-                
-                // Map the options and get the selected ones
-                this.options = this.props.dataSourceOptions.items.map(item => {
-                    const optionTitle = this.props.titleAttr(item).value;
-                    const option = {title: optionTitle};
-                    //If key is used, add key to the option
-                    if (this.props.keyAttr) {
-                        option.key = this.props.keyAttr(item).value;
-                    }
-                    // If data needs to be refreshed, get default options
-                    if (this.refreshData) {
-                        if (this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value) {
-                            if (multiSelect) {
-                                optionsSelected.push(option);
-                            } else {
-                                if (optionsSelected === null) {
-                                    optionsSelected = option;
+        if (this.props.dataSourceOptions !== prevProps.dataSourceOptions) {
+            if (this.props.dataSourceOptions.status === 'available') {
+                // If the items have been changed or if date needs to be refreshed, change the options
+                if (this.refreshData ||
+                    this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
+                    let warningGiven = false;
+                    const multiSelect = this.props.multiple;
+                    let optionsSelected = multiSelect ? [] : null;
+                    
+                    // Map the options and get the selected ones
+                    this.options = this.props.dataSourceOptions.items.map(item => {
+                        const optionTitle = this.props.titleAttr(item).value;
+                        const option = {title: optionTitle};
+                        //If key is used, add key to the option
+                        if (this.props.keyAttr) {
+                            option.key = this.props.keyAttr(item).value;
+                        }
+                        // If data needs to be refreshed, get default options
+                        if (this.refreshData) {
+                            if (this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value) {
+                                if (multiSelect) {
+                                    optionsSelected.push(option);
                                 } else {
-                                    if (!warningGiven) {
-                                        console.warn("Autocomplete Multiselect: Multiple options are set as default for a single select. First option is set as the selected one.");
-                                        warningGiven = true;
+                                    if (optionsSelected === null) {
+                                        optionsSelected = option;
+                                    } else {
+                                        if (!warningGiven) {
+                                            console.warn("Autocomplete Multiselect: Multiple options are set as default for a single select. First option is set as the selected one.");
+                                            warningGiven = true;
+                                        }
                                     }
                                 }
                             }
-                        }
-                    } else {
-                        // Else check if option is selected (based on the title). This is done since it can be the case that the options have been changed.
-                        if (multiSelect) {
-                            if (this.optionsSelected.find(option => option.title === optionTitle)) {
-                                optionsSelected.push(option);
+                        } else {
+                            // Else check if option is selected (based on the title). This is done since it can be the case that the options have been changed.
+                            if (multiSelect) {
+                                if (this.optionsSelected.find(option => option.title === optionTitle)) {
+                                    optionsSelected.push(option);
+                                }
+                            } else if (this.optionsSelected !== null) {
+                                if (this.optionsSelected.title === optionTitle) {
+                                    optionsSelected = option;
+                                }
                             }
-                        } else if (this.optionsSelected !== null) {
-                            if (this.optionsSelected.title === optionTitle) {
-                                optionsSelected = option;
-                            }
                         }
-                    }
-                    return option;
-                })
-                refreshState = true;
-                this.initialized = true;
-                this.refreshData = false;
-                this.optionsSelected = optionsSelected;
-                // Store response in responseAttribute
-                this.props.responseAttribute.setValue(JSON.stringify(optionsSelected));
+                        return option;
+                    })
+                    refreshState = true;
+                    this.initialized = true;
+                    this.refreshData = false;
+                    this.optionsSelected = optionsSelected;
+                    // Store response in responseAttribute
+                    this.props.responseAttribute.setValue(JSON.stringify(optionsSelected));
+                }
             }
         }
 

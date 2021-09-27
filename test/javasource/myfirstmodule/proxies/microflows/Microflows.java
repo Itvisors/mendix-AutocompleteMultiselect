@@ -21,6 +21,12 @@ public class Microflows
 		params.put("Book", _book == null ? null : _book.getMendixObject());
 		Core.microflowCall("MyFirstModule.ACT_Book_Save").withParams(params).execute(context);
 	}
+	public static void aCT_Book_SaveAndReset(IContext context, myfirstmodule.proxies.Book _book)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Book", _book == null ? null : _book.getMendixObject());
+		Core.microflowCall("MyFirstModule.ACT_Book_SaveAndReset").withParams(params).execute(context);
+	}
 	public static void aCT_Collection_MapIntKey(IContext context, myfirstmodule.proxies.Collection _collection)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -32,6 +38,12 @@ public class Microflows
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
 		Core.microflowCall("MyFirstModule.ACT_Collection_MapStringKey").withParams(params).execute(context);
+	}
+	public static void aCT_Collection_OpenDefaultStringAdvanced(IContext context, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.ACT_Collection_OpenDefaultStringAdvanced").withParams(params).execute(context);
 	}
 	public static void aCT_Collection_Reset(IContext context, myfirstmodule.proxies.Collection _collection)
 	{
@@ -76,5 +88,11 @@ public class Microflows
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
 		Core.microflowCall("MyFirstModule.OCH_Collection_SetSelectedBooks").withParams(params).execute(context);
+	}
+	public static void sUB_Collection_SetDefaultString(IContext context, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.SUB_Collection_SetDefaultString").withParams(params).execute(context);
 	}
 }

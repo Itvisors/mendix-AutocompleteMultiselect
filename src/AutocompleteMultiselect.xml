@@ -41,6 +41,13 @@
                     <attributeType name="Boolean"/>
                 </attributeTypes>
             </property>
+            <property key="defaultSelectedStringAttr" type="attribute" required="false">
+                <caption>Default selected string</caption>
+                <description>Advanced: Can be used instead of Default selected. If this one is used, the default selected property is ignored. This property links to a string where the default selected titles are stored in the json format ["title1","title2"].</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
             <property key="multiple" type="boolean" required="true" defaultValue="true">
                 <caption>Multi-select</caption>
                 <description>If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select</description>

@@ -22,7 +22,8 @@ public class Collection
 	{
 		Name("Name"),
 		Reset("Reset"),
-		Response("Response");
+		Response("Response"),
+		DefaultString("DefaultString");
 
 		private java.lang.String metaName;
 
@@ -223,6 +224,42 @@ public class Collection
 	public final void setResponse(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String response)
 	{
 		getMendixObject().setValue(context, MemberNames.Response.toString(), response);
+	}
+
+	/**
+	 * @return value of DefaultString
+	 */
+	public final java.lang.String getDefaultString()
+	{
+		return getDefaultString(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of DefaultString
+	 */
+	public final java.lang.String getDefaultString(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.DefaultString.toString());
+	}
+
+	/**
+	 * Set value of DefaultString
+	 * @param defaultstring
+	 */
+	public final void setDefaultString(java.lang.String defaultstring)
+	{
+		setDefaultString(getContext(), defaultstring);
+	}
+
+	/**
+	 * Set value of DefaultString
+	 * @param context
+	 * @param defaultstring
+	 */
+	public final void setDefaultString(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String defaultstring)
+	{
+		getMendixObject().setValue(context, MemberNames.DefaultString.toString(), defaultstring);
 	}
 
 	/**

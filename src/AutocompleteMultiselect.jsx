@@ -42,7 +42,8 @@ export default class AutocompleteMultiselect extends Component {
                     let warningGiven = false;
                     const multiSelect = this.props.multiple;
                     let optionsSelected = multiSelect ? [] : null;
-                    
+                    let defaultSelectedString = undefined;
+
                     // Map the options and get the selected ones
                     this.options = this.props.dataSourceOptions.items.map(item => {
                         const optionTitle = this.props.titleAttr(item).value;
@@ -53,7 +54,27 @@ export default class AutocompleteMultiselect extends Component {
                         }
                         // If data needs to be refreshed, get default options
                         if (this.refreshData) {
-                            if (this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value) {
+                            // If string is not yet filled, fill with either the json or with null
+                            if (defaultSelectedString === undefined) {
+                                if (this.props.defaultSelectedStringAttr !== undefined) {
+                                    try {
+                                        defaultSelectedString = JSON.parse(this.props.defaultSelectedStringAttr.value);;
+                                    } catch (e) {
+                                        defaultSelectedString = [];
+                                    }                                    
+                                } else {
+                                    // set to null to not check this for every item again
+                                    defaultSelectedString = null;
+                                }
+                            }
+                            let isItemDefaultSelected = false;
+                            // Items can be set to default selected in two ways: defaultSelectedStringAttr prop or defaultSelectedAttr prop on an item. If the first option is chosen, the prop on the item is ignored.
+                            if (defaultSelectedString !== null) {
+                                isItemDefaultSelected = defaultSelectedString.indexOf(optionTitle) != -1;
+                            } else {
+                                isItemDefaultSelected = this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value;
+                            }
+                            if (isItemDefaultSelected) {
                                 if (multiSelect) {
                                     optionsSelected.push(option);
                                 } else {

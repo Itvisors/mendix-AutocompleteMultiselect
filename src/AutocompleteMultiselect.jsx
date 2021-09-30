@@ -70,7 +70,7 @@ export default class AutocompleteMultiselect extends Component {
                             let isItemDefaultSelected = false;
                             // Items can be set to default selected in two ways: defaultSelectedStringAttr prop or defaultSelectedAttr prop on an item. If the first option is chosen, the prop on the item is ignored.
                             if (defaultSelectedString !== null) {
-                                isItemDefaultSelected = defaultSelectedString.indexOf(optionTitle) != -1;
+                                isItemDefaultSelected = defaultSelectedString.indexOf(optionTitle) !== -1;
                             } else {
                                 isItemDefaultSelected = this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value;
                             }

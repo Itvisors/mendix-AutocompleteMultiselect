@@ -131,6 +131,11 @@
                 <caption>Load on open</caption>
                 <description>If set to true, an action is called when the widget is opened that can fill the data source attribute.</description>
             </property>
+            <property key="loadingText" type="expression" required="false">
+                <caption>Loading text</caption>
+                <description>Text to show when loading</description>
+                <returnType type="String" />
+            </property>
             <property key="onOpenAction" type="action" required="false">
                 <caption>On Open Action</caption>
                 <description>Action to trigger when the widget is opened, this flow has to fill in the JSON attribute.</description>
@@ -139,6 +144,11 @@
                 <caption>Search after X chars</caption>
                 <description>Custom search: Only execute "Key stroke action" after X chars are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.</description>
                 <returnType type="Integer" />
+            </property>
+            <property key="searchAfterXCharsText" type="expression" required="false">
+                <caption>To few chars text</caption>
+                <description>Text to show when to few chars are filled</description>
+                <returnType type="String" />
             </property>
             <property key="onKeyStrokeAction" type="action" required="false">
                 <caption>Key stroke action</caption>

@@ -4,16 +4,16 @@
 
 package myfirstmodule.proxies;
 
-public class AutocompletHelper
+public class AutocompleteHelper
 {
-	private final com.mendix.systemwideinterfaces.core.IMendixObject autocompletHelperMendixObject;
+	private final com.mendix.systemwideinterfaces.core.IMendixObject autocompleteHelperMendixObject;
 
 	private final com.mendix.systemwideinterfaces.core.IContext context;
 
 	/**
 	 * Internal name of this entity
 	 */
-	public static final java.lang.String entityName = "MyFirstModule.AutocompletHelper";
+	public static final java.lang.String entityName = "MyFirstModule.AutocompleteHelper";
 
 	/**
 	 * Enum describing members of this entity
@@ -21,7 +21,7 @@ public class AutocompletHelper
 	public enum MemberNames
 	{
 		Input("Input"),
-		AutocompletHelper_Collection("MyFirstModule.AutocompletHelper_Collection");
+		AutocompleteHelper_Collection("MyFirstModule.AutocompleteHelper_Collection");
 
 		private java.lang.String metaName;
 
@@ -37,44 +37,44 @@ public class AutocompletHelper
 		}
 	}
 
-	public AutocompletHelper(com.mendix.systemwideinterfaces.core.IContext context)
+	public AutocompleteHelper(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MyFirstModule.AutocompletHelper"));
+		this(context, com.mendix.core.Core.instantiate(context, "MyFirstModule.AutocompleteHelper"));
 	}
 
-	protected AutocompletHelper(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject autocompletHelperMendixObject)
+	protected AutocompleteHelper(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject autocompleteHelperMendixObject)
 	{
-		if (autocompletHelperMendixObject == null)
+		if (autocompleteHelperMendixObject == null)
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MyFirstModule.AutocompletHelper", autocompletHelperMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MyFirstModule.AutocompletHelper");
+		if (!com.mendix.core.Core.isSubClassOf("MyFirstModule.AutocompleteHelper", autocompleteHelperMendixObject.getType()))
+			throw new java.lang.IllegalArgumentException("The given object is not a MyFirstModule.AutocompleteHelper");
 
-		this.autocompletHelperMendixObject = autocompletHelperMendixObject;
+		this.autocompleteHelperMendixObject = autocompleteHelperMendixObject;
 		this.context = context;
 	}
 
 	/**
-	 * @deprecated Use 'AutocompletHelper.load(IContext, IMendixIdentifier)' instead.
+	 * @deprecated Use 'AutocompleteHelper.load(IContext, IMendixIdentifier)' instead.
 	 */
 	@java.lang.Deprecated
-	public static myfirstmodule.proxies.AutocompletHelper initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
+	public static myfirstmodule.proxies.AutocompleteHelper initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
-		return myfirstmodule.proxies.AutocompletHelper.load(context, mendixIdentifier);
+		return myfirstmodule.proxies.AutocompleteHelper.load(context, mendixIdentifier);
 	}
 
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
 	 */
-	public static myfirstmodule.proxies.AutocompletHelper initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
+	public static myfirstmodule.proxies.AutocompleteHelper initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
-		return new myfirstmodule.proxies.AutocompletHelper(context, mendixObject);
+		return new myfirstmodule.proxies.AutocompleteHelper(context, mendixObject);
 	}
 
-	public static myfirstmodule.proxies.AutocompletHelper load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
+	public static myfirstmodule.proxies.AutocompleteHelper load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
 		com.mendix.systemwideinterfaces.core.IMendixObject mendixObject = com.mendix.core.Core.retrieveId(context, mendixIdentifier);
-		return myfirstmodule.proxies.AutocompletHelper.initialize(context, mendixObject);
+		return myfirstmodule.proxies.AutocompleteHelper.initialize(context, mendixObject);
 	}
 
 	/**
@@ -145,46 +145,46 @@ public class AutocompletHelper
 	}
 
 	/**
-	 * @return value of AutocompletHelper_Collection
+	 * @return value of AutocompleteHelper_Collection
 	 */
-	public final myfirstmodule.proxies.Collection getAutocompletHelper_Collection() throws com.mendix.core.CoreException
+	public final myfirstmodule.proxies.Collection getAutocompleteHelper_Collection() throws com.mendix.core.CoreException
 	{
-		return getAutocompletHelper_Collection(getContext());
+		return getAutocompleteHelper_Collection(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of AutocompletHelper_Collection
+	 * @return value of AutocompleteHelper_Collection
 	 */
-	public final myfirstmodule.proxies.Collection getAutocompletHelper_Collection(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	public final myfirstmodule.proxies.Collection getAutocompleteHelper_Collection(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		myfirstmodule.proxies.Collection result = null;
-		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.AutocompletHelper_Collection.toString());
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.AutocompleteHelper_Collection.toString());
 		if (identifier != null)
 			result = myfirstmodule.proxies.Collection.load(context, identifier);
 		return result;
 	}
 
 	/**
-	 * Set value of AutocompletHelper_Collection
-	 * @param autocomplethelper_collection
+	 * Set value of AutocompleteHelper_Collection
+	 * @param autocompletehelper_collection
 	 */
-	public final void setAutocompletHelper_Collection(myfirstmodule.proxies.Collection autocomplethelper_collection)
+	public final void setAutocompleteHelper_Collection(myfirstmodule.proxies.Collection autocompletehelper_collection)
 	{
-		setAutocompletHelper_Collection(getContext(), autocomplethelper_collection);
+		setAutocompleteHelper_Collection(getContext(), autocompletehelper_collection);
 	}
 
 	/**
-	 * Set value of AutocompletHelper_Collection
+	 * Set value of AutocompleteHelper_Collection
 	 * @param context
-	 * @param autocomplethelper_collection
+	 * @param autocompletehelper_collection
 	 */
-	public final void setAutocompletHelper_Collection(com.mendix.systemwideinterfaces.core.IContext context, myfirstmodule.proxies.Collection autocomplethelper_collection)
+	public final void setAutocompleteHelper_Collection(com.mendix.systemwideinterfaces.core.IContext context, myfirstmodule.proxies.Collection autocompletehelper_collection)
 	{
-		if (autocomplethelper_collection == null)
-			getMendixObject().setValue(context, MemberNames.AutocompletHelper_Collection.toString(), null);
+		if (autocompletehelper_collection == null)
+			getMendixObject().setValue(context, MemberNames.AutocompleteHelper_Collection.toString(), null);
 		else
-			getMendixObject().setValue(context, MemberNames.AutocompletHelper_Collection.toString(), autocomplethelper_collection.getMendixObject().getId());
+			getMendixObject().setValue(context, MemberNames.AutocompleteHelper_Collection.toString(), autocompletehelper_collection.getMendixObject().getId());
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class AutocompletHelper
 	 */
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
-		return autocompletHelperMendixObject;
+		return autocompleteHelperMendixObject;
 	}
 
 	/**
@@ -211,7 +211,7 @@ public class AutocompletHelper
 
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
-			final myfirstmodule.proxies.AutocompletHelper that = (myfirstmodule.proxies.AutocompletHelper) obj;
+			final myfirstmodule.proxies.AutocompleteHelper that = (myfirstmodule.proxies.AutocompleteHelper) obj;
 			return getMendixObject().equals(that.getMendixObject());
 		}
 		return false;
@@ -228,7 +228,7 @@ public class AutocompletHelper
 	 */
 	public static java.lang.String getType()
 	{
-		return "MyFirstModule.AutocompletHelper";
+		return "MyFirstModule.AutocompleteHelper";
 	}
 
 	/**

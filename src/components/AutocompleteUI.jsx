@@ -19,6 +19,9 @@ export class AutocompleteUI extends Component {
         onChange = {this.props.onChange}
         noOptionsText = {this.props.noOptionsText}
         limitTags={this.props.limitTags}
+        onOpen = {this.props.onOpen}
+        loading = {this.props.loading}
+        loadingText = {this.props.loadingText}
         renderOption={(option, { selected }) => (
             <Fragment>
             {this.props.showCheckboxes ? <Checkbox
@@ -35,7 +38,6 @@ export class AutocompleteUI extends Component {
             placeholder={this.props.placeholder}
         />
         )}
-
     />;
   }
 }

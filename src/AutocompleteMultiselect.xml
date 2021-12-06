@@ -15,11 +15,11 @@
                 <description>Whether or not the widget is ediable. If left empty, the widget will be editable.</description>
                 <returnType type="Boolean" />
             </property>
-            <property key="dataSourceOptions" type="datasource" isList="true" required="true">
+            <property key="dataSourceOptions" type="datasource" isList="true" required="false">
                 <caption>Data source</caption>
                 <description />
             </property>
-            <property key="titleAttr" type="attribute" dataSource="dataSourceOptions" required="true">
+            <property key="titleAttr" type="attribute" dataSource="dataSourceOptions" required="false">
                 <caption>Title</caption>
                 <description>String attribute where the title is stored to be shown in the dropdown. Should be unique to be able to make a distinction between the items.</description>
                 <attributeTypes>
@@ -115,6 +115,39 @@
             <property key="showCheckboxes" type="boolean" required="true" defaultValue="false">
                 <caption>Checkboxes</caption>
                 <description>Whether or not to show checkboxes in front of the options.</description>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Data source attibute">
+            <property key="JSONAttribute" type="attribute" required="false">
+                <caption>Data source attribute</caption>
+                <description>This property will overrule the data source and default selected properties. Attribute should contain the list of items to be shown in the widget in the JSON format ([{"title":"title1", "key":"key1", "default":true}]), where default and key are optional.
+                Can be used when the items are non-persistent and you don't want to keep them in cache or when you only want to load items when the widget is selected or X chars are filled in.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="loadOnOpen" type="boolean" required="true" defaultValue="false">
+                <caption>Load on open</caption>
+                <description>If set to true, an action is called when the widget is opened that can fill the data source attribute.</description>
+            </property>
+            <property key="onOpenAction" type="action" required="false">
+                <caption>On Open Action</caption>
+                <description>Action to trigger when the widget is opened, this flow has to fill in the JSON attribute.</description>
+            </property>
+            <property key="searchAfterXChars" type="expression" required="false">
+                <caption>Search after X chars</caption>
+                <description>Custom search: Only execute "Key stroke action" after X chars are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.</description>
+                <returnType type="Integer" />
+            </property>
+            <property key="onKeyStrokeAction" type="action" required="false">
+                <caption>Key stroke action</caption>
+                <description>Custom search: Action to trigger when a key stroke is entered, this flow has to fill in the JSON attribute.</description>
+            </property>
+            <property key="onKeyStrokeActionDelay" type="expression" required="true" defaultValue="500">
+                <caption>Key stroke delay</caption>
+                <description>Custom search: Determines how many ms to wait after the last key stroke to execute the action. Used to determine whether a person is still typing.</description>
+                <returnType type="Integer" />
             </property>
         </propertyGroup>
     </properties>

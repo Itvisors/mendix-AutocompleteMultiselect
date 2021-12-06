@@ -33,8 +33,29 @@ export default class AutocompleteMultiselect extends Component {
             refreshState = true; 
         }
 
-        // Check if the datasource has been loaded
-        if (this.props.dataSourceOptions !== prevProps.dataSourceOptions) {
+        // Check if data sourse or attribute is used
+        if (this.props.JSONAttribute) {
+            if (this.props.JSONAttribute.status === 'available') { 
+                if (this.refreshData || this.props.JSONAttribute !== prevProps.JSONAttribute) {
+                    if (this.props.JSONAttribute.value && this.props.JSONAttribute.value !== '') {
+                        var dataParsed = JSON.parse(this.props.JSONAttribute.value);
+                        var defaultValue = dataParsed.filter(option => option.default);
+                        if (this.props.multiple) {
+                            this.optionsSelected = defaultValue;
+                        } else {
+                            this.optionsSelected = defaultValue[0];
+                        }
+                        this.options = dataParsed;
+                        
+                        refreshState = true;
+                        this.initialized = true;
+                        this.refreshData = false;
+                        // Store response in responseAttribute
+                        this.props.responseAttribute.setValue(JSON.stringify(this.optionsSelected));
+                    }
+                }
+            }
+        } else if (this.props.dataSourceOptions !== prevProps.dataSourceOptions) { // Check if the datasource has been loaded
             if (this.props.dataSourceOptions.status === 'available') {
                 // If the items have been changed or if date needs to be refreshed, change the options
                 if (this.refreshData ||

@@ -24,7 +24,6 @@ public class Book
 		Selected("Selected"),
 		KeyString("KeyString"),
 		KeyInteger("KeyInteger"),
-		Attribute("Attribute"),
 		Book_Collection("MyFirstModule.Book_Collection");
 
 		private java.lang.String metaName;
@@ -262,42 +261,6 @@ public class Book
 	public final void setKeyInteger(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer keyinteger)
 	{
 		getMendixObject().setValue(context, MemberNames.KeyInteger.toString(), keyinteger);
-	}
-
-	/**
-	 * @return value of Attribute
-	 */
-	public final java.lang.Long getAttribute()
-	{
-		return getAttribute(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of Attribute
-	 */
-	public final java.lang.Long getAttribute(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.Attribute.toString());
-	}
-
-	/**
-	 * Set value of Attribute
-	 * @param attribute
-	 */
-	public final void setAttribute(java.lang.Long attribute)
-	{
-		setAttribute(getContext(), attribute);
-	}
-
-	/**
-	 * Set value of Attribute
-	 * @param context
-	 * @param attribute
-	 */
-	public final void setAttribute(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long attribute)
-	{
-		getMendixObject().setValue(context, MemberNames.Attribute.toString(), attribute);
 	}
 
 	/**

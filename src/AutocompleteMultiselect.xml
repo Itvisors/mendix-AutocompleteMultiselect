@@ -137,12 +137,12 @@
             <property key="onOpenAction" type="action" required="false">
                 <caption>On Open Action</caption>
                 <description>Only if Data source attribute is used.
-                Action to trigger when the widget is opened, this flow has to fill in the data source attribute.</description>
+                Action to trigger when the widget is opened, this flow has to fill in the data source attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.</description>
             </property>
-            <property key="searchAfterXChars" type="expression" required="false">
+            <property key="searchAfterXChars" type="expression" required="true" defaultValue="0">
                 <caption>Search after X chars</caption>
                 <description>Only if Data source attribute is used.
-                Custom search: Only execute "Key stroke action" after X chars are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.</description>
+                Custom search: Only execute "Key stroke action" after X chars or more are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.</description>
                 <returnType type="Integer" />
             </property>
             <property key="searchAfterXCharsText" type="expression" required="false">

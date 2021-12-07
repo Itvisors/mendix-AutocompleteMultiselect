@@ -23,6 +23,8 @@ export default class AutocompleteMultiselect extends Component {
         this.refreshData = true;
 
         this.loading = true;
+
+        this.showToFewCharsText = false;
         
         this.latestInputChange = undefined;
     }
@@ -176,11 +178,22 @@ export default class AutocompleteMultiselect extends Component {
         this.setState({updateDate: new Date()}); 
     }
 
+    /**
+     * Function calles when dropdown is opened
+     */
     openDropdown() {
         this.loading = true;
+        // check if enough chars are filled
+        if (this.props.onKeyStrokeAction) {
+            if (this.props.searchAfterXChars.value && this.props.searchAfterXChars.value > 0) {
+                this.showToFewCharsText = true;
+            }
+        }
         if (this.props.onOpenAction && this.props.onOpenAction.canExecute) {
             this.props.onOpenAction.execute();
-        }
+        } 
+        // Rerender widget
+        this.setState({updateDate: new Date()}); 
     }
 
     /**
@@ -191,27 +204,32 @@ export default class AutocompleteMultiselect extends Component {
      * @param {*} reason - the reason that this action is triggered, either input, clear or reset
      */
     inputChange = (event, value, reason)  => {
-        const timeStamp = event.timeStamp
-        this.latestInputChange = timeStamp;
+        if (this.props.searchAfterXChars.value === undefined || value.length >= this.props.searchAfterXChars.value) {
+            this.showToFewCharsText = false;
+            const timeStamp = event.timeStamp
+            this.latestInputChange = timeStamp;
+            //Check if no other inputchange will be done
+            setTimeout((timeStamp, value, reason) => {
+                if (this.latestInputChange === timeStamp) {
+                    if (this.props.searchValue) {
+                        this.props.searchValue.setValue(value);
+                    }
+                    // Do not call action when widget is closed 
+                    if (reason !== 'reset') {
+                        if (this.props.onKeyStrokeAction && this.props.onKeyStrokeAction.canExecute) {
+                            this.props.onKeyStrokeAction.execute();
+                        }
+                    }
+                }
+            }, this.props.onKeyStrokeActionDelay.value, timeStamp, value, reason)
+        } else {
+            this.showToFewCharsText = true;
+        }
         if (reason !== 'reset') {
             this.loading = true;
             // make sure to rerender the widget
             this.setState({updateDate: new Date()});
         }
-        //Check if no other inputchange will be done
-        setTimeout((timeStamp, value, reason) => {
-            if (this.latestInputChange === timeStamp) {
-                if (this.props.searchValue) {
-                    this.props.searchValue.setValue(value);
-                }
-                // Do not call action when widget is closed 
-                if (reason !== 'reset') {
-                    if (this.props.onKeyStrokeAction && this.props.onKeyStrokeAction.canExecute) {
-                        this.props.onKeyStrokeAction.execute();
-                    }
-                }
-            }
-        }, this.props.onKeyStrokeActionDelay.value, timeStamp, value, reason)
     }
 
     render() {
@@ -243,24 +261,23 @@ export default class AutocompleteMultiselect extends Component {
         let loadingText = undefined;
         let options = this.options;
         if (this.props.JSONAttribute) {
-            if (this.props.onOpenAction) {
-                onOpen = this.onOpenDropdown;
-            }
+            onOpen = this.onOpenDropdown;
             if (this.props.onKeyStrokeAction) {
                 onInputChange = this.onInputChange;
             }
             loading = this.loading;
 
-            loadingText = this.props.loadingText ? this.props.loadingText.value : undefined;
+            // set loading text, if to few chars are filled use this text.
+            if (this.showToFewCharsText) {
+                loadingText = this.props.searchAfterXCharsText ? this.props.searchAfterXCharsText.value : "Enter at least " + this.props.searchAfterXChars.value + " characters";
+            } else {
+                loadingText = this.props.loadingText ? this.props.loadingText.value : undefined;
+            }
             // if component is loading, hide options
             if (this.loading) {
                 options = []
             }
         }
-
-        
-
-        
 
         return <AutocompleteUI 
                     key = {this.autoCompleteKey}

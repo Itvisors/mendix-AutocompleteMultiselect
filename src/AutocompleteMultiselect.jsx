@@ -12,8 +12,9 @@ export default class AutocompleteMultiselect extends Component {
             updateDate: null
         };
         this.autoCompleteKey = 0;
-        this.onInputChange = this.changeInput.bind(this);
+        this.onChange = this.changeValues.bind(this);
         this.onOpenDropdown = this.openDropdown.bind(this);
+        this.onInputChange = this.inputChange.bind(this);
         this.options = [];
         this.optionsSelected = []; // Array for multiselect, otherwise object
         this.initialized = false;
@@ -44,11 +45,20 @@ export default class AutocompleteMultiselect extends Component {
                     if (this.props.JSONAttribute.value && this.props.JSONAttribute.value !== '') {
                         dataParsed = JSON.parse(this.props.JSONAttribute.value);
                     }
-                    let defaultValue = dataParsed.filter(option => option.default);
-                    if (this.props.multiple) {
-                        this.optionsSelected = defaultValue;
+                    if (this.refreshData) {
+                        let defaultValue = dataParsed.filter(option => option.default);
+                        if (this.props.multiple) {
+                            this.optionsSelected = defaultValue;
+                        } else {
+                            this.optionsSelected = defaultValue[0];
+                        }
                     } else {
-                        this.optionsSelected = defaultValue[0];
+                        if (this.props.onKeyStrokeAction) {
+                            let optionsSelectedNotInList = this.optionsSelected.filter(selectedOption => {
+                                return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) === undefined;
+                            })
+                            dataParsed = dataParsed.concat(optionsSelectedNotInList);
+                        }
                     }
                     this.options = dataParsed;
                     
@@ -152,7 +162,7 @@ export default class AutocompleteMultiselect extends Component {
      * @param {*} reason - the reason that this action is triggered, either select-option, remove-option, create-option, blur or clear
      * @param {*} details - more details about the option for which this event is triggered
      */
-    changeInput(event, newValue, reason, details) {
+    changeValues(event, newValue, reason, details) {
         // Store response in responseAttribute and call on change action
         this.props.responseAttribute.setValue(JSON.stringify(newValue));
         
@@ -168,6 +178,26 @@ export default class AutocompleteMultiselect extends Component {
         this.loading = true;
         if (this.props.onOpenAction && this.props.onOpenAction.canExecute) {
             this.props.onOpenAction.execute();
+        }
+    }
+
+    /**
+     * Function called when a the input value changes
+     * 
+     * @param {*} event - the event that triggered this action
+     * @param {*} value - the new value of the input
+     * @param {*} reason - the reason that this action is triggered, either input, clear or reset
+     */
+    inputChange = (event, value, reason)  => {
+        if (this.props.searchValue) {
+            this.props.searchValue.setValue(value);
+        }
+        // Do not call action when widget is closed 
+        if (reason !== 'reset') {
+            this.loading = true;
+            if (this.props.onKeyStrokeAction && this.props.onKeyStrokeAction.canExecute) {
+                this.props.onKeyStrokeAction.execute();
+            }
         }
     }
 
@@ -194,12 +224,18 @@ export default class AutocompleteMultiselect extends Component {
         const label = this.props.label ? this.props.label.value : undefined;
 
         let onOpen = undefined;
-        if (this.props.loadOnOpen) {
-            onOpen = this.onOpenDropdown;
+        let onInputChange = undefined;
+        if (this.props.JSONAttribute) {
+            if (this.props.onOpenAction) {
+                onOpen = this.onOpenDropdown;
+            }
+            if (this.props.onKeyStrokeAction) {
+                onInputChange = this.onInputChange;
+            }
         }
 
         // if component is loading, hide options
-        const options = this.loading ? [] : this.options
+        const options = this.loading ? [] : this.options;
 
         const loadingText = this.props.loadingText ? this.props.loadingText.value : undefined;
 
@@ -210,7 +246,7 @@ export default class AutocompleteMultiselect extends Component {
                     disableCloseOnSelect = {this.props.disableCloseOnSelect}
                     options = {options}
                     value = {this.optionsSelected}
-                    onChange = {this.onInputChange}
+                    onChange = {this.onChange}
                     noOptionsText = {noOptionsText}
                     limitTags={limitTags}
                     showCheckboxes = {this.props.showCheckboxes}
@@ -219,8 +255,9 @@ export default class AutocompleteMultiselect extends Component {
                     placeholder={placeholder}
                     filterSelectedOptions={this.props.filterSelectedOptions}
                     onOpen = {onOpen}
-                    loading = {true}
+                    loading = {this.loading}
                     loadingText = {loadingText}
+                    onInputChange={onInputChange}
             />;
     }
 }

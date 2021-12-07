@@ -21,6 +21,7 @@ public class AutocompleteHelper
 	public enum MemberNames
 	{
 		Input("Input"),
+		SearchValue("SearchValue"),
 		AutocompleteHelper_Collection("MyFirstModule.AutocompleteHelper_Collection");
 
 		private java.lang.String metaName;
@@ -142,6 +143,42 @@ public class AutocompleteHelper
 	public final void setInput(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String input)
 	{
 		getMendixObject().setValue(context, MemberNames.Input.toString(), input);
+	}
+
+	/**
+	 * @return value of SearchValue
+	 */
+	public final java.lang.String getSearchValue()
+	{
+		return getSearchValue(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of SearchValue
+	 */
+	public final java.lang.String getSearchValue(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.SearchValue.toString());
+	}
+
+	/**
+	 * Set value of SearchValue
+	 * @param searchvalue
+	 */
+	public final void setSearchValue(java.lang.String searchvalue)
+	{
+		setSearchValue(getContext(), searchvalue);
+	}
+
+	/**
+	 * Set value of SearchValue
+	 * @param context
+	 * @param searchvalue
+	 */
+	public final void setSearchValue(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String searchvalue)
+	{
+		getMendixObject().setValue(context, MemberNames.SearchValue.toString(), searchvalue);
 	}
 
 	/**

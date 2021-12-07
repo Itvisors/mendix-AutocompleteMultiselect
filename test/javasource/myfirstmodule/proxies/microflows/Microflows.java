@@ -15,6 +15,13 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 public class Microflows
 {
 	// These are the microflows for the MyFirstModule module
+	public static void aCT_AutocompleteHelper_CustomSearch(IContext context, myfirstmodule.proxies.AutocompleteHelper _autocompleteHelper, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("AutocompleteHelper", _autocompleteHelper == null ? null : _autocompleteHelper.getMendixObject());
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.ACT_AutocompleteHelper_CustomSearch").withParams(params).execute(context);
+	}
 	public static void aCT_AutocompleteHelper_FillJSON(IContext context, myfirstmodule.proxies.AutocompleteHelper _autocompletHelper, myfirstmodule.proxies.Collection _collection)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -70,11 +77,18 @@ public class Microflows
 		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
 		Core.microflowCall("MyFirstModule.ACT_Collection_Save_SingleSelect").withParams(params).execute(context);
 	}
-	public static myfirstmodule.proxies.AutocompleteHelper dS_Collection_GetAutoCompleteHelper(IContext context, myfirstmodule.proxies.Collection _collection)
+	public static myfirstmodule.proxies.AutocompleteHelper dS_Collection_GetAutoCompleteHelperAndFillInput(IContext context, myfirstmodule.proxies.Collection _collection)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.DS_Collection_GetAutoCompleteHelper").withParams(params).execute(context);
+		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.DS_Collection_GetAutoCompleteHelperAndFillInput").withParams(params).execute(context);
+		return result == null ? null : myfirstmodule.proxies.AutocompleteHelper.initialize(context, result);
+	}
+	public static myfirstmodule.proxies.AutocompleteHelper dS_Collection_GetAutoCompleteHelperAndGetDefaults(IContext context, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.DS_Collection_GetAutoCompleteHelperAndGetDefaults").withParams(params).execute(context);
 		return result == null ? null : myfirstmodule.proxies.AutocompleteHelper.initialize(context, result);
 	}
 	public static java.util.List<myfirstmodule.proxies.Book> dS_Collection_GetBooks(IContext context, myfirstmodule.proxies.Collection _collection)
@@ -109,6 +123,13 @@ public class Microflows
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
 		Core.microflowCall("MyFirstModule.OCH_Collection_SetSelectedBooks").withParams(params).execute(context);
+	}
+	public static void sUB_AutocompleteHelper_FillJSONWithDefaults(IContext context, myfirstmodule.proxies.AutocompleteHelper _autocompletHelper, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("AutocompletHelper", _autocompletHelper == null ? null : _autocompletHelper.getMendixObject());
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.SUB_AutocompleteHelper_FillJSONWithDefaults").withParams(params).execute(context);
 	}
 	public static void sUB_Collection_SetDefaultString(IContext context, myfirstmodule.proxies.Collection _collection)
 	{

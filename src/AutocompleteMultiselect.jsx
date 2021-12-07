@@ -23,6 +23,8 @@ export default class AutocompleteMultiselect extends Component {
         this.refreshData = true;
 
         this.loading = true;
+        
+        this.latestInputChange = undefined;
     }
 
     componentDidUpdate (prevProps) {
@@ -67,8 +69,8 @@ export default class AutocompleteMultiselect extends Component {
                     this.refreshData = false;
                     // Store response in responseAttribute
                     this.props.responseAttribute.setValue(JSON.stringify(this.optionsSelected)); 
+                    this.loading = false;
                 }
-                this.loading = false;
             }
         } else if (this.props.dataSourceOptions !== prevProps.dataSourceOptions) { // Check if the datasource has been loaded
             if (this.props.dataSourceOptions.status === 'available') {
@@ -144,8 +146,8 @@ export default class AutocompleteMultiselect extends Component {
                     this.optionsSelected = optionsSelected;
                     // Store response in responseAttribute
                     this.props.responseAttribute.setValue(JSON.stringify(optionsSelected));
+                    this.loading = false;
                 }
-                this.loading = false;
             }
         }
 
@@ -189,16 +191,27 @@ export default class AutocompleteMultiselect extends Component {
      * @param {*} reason - the reason that this action is triggered, either input, clear or reset
      */
     inputChange = (event, value, reason)  => {
-        if (this.props.searchValue) {
-            this.props.searchValue.setValue(value);
-        }
-        // Do not call action when widget is closed 
+        const timeStamp = event.timeStamp
+        this.latestInputChange = timeStamp;
         if (reason !== 'reset') {
             this.loading = true;
-            if (this.props.onKeyStrokeAction && this.props.onKeyStrokeAction.canExecute) {
-                this.props.onKeyStrokeAction.execute();
-            }
+            // make sure to rerender the widget
+            this.setState({updateDate: new Date()});
         }
+        //Check if no other inputchange will be done
+        setTimeout((timeStamp, value, reason) => {
+            if (this.latestInputChange === timeStamp) {
+                if (this.props.searchValue) {
+                    this.props.searchValue.setValue(value);
+                }
+                // Do not call action when widget is closed 
+                if (reason !== 'reset') {
+                    if (this.props.onKeyStrokeAction && this.props.onKeyStrokeAction.canExecute) {
+                        this.props.onKeyStrokeAction.execute();
+                    }
+                }
+            }
+        }, this.props.onKeyStrokeActionDelay.value, timeStamp, value, reason)
     }
 
     render() {
@@ -223,8 +236,12 @@ export default class AutocompleteMultiselect extends Component {
         
         const label = this.props.label ? this.props.label.value : undefined;
 
+        // Following options only used when json attribute is used
         let onOpen = undefined;
         let onInputChange = undefined;
+        let loading = undefined;
+        let loadingText = undefined;
+        let options = this.options;
         if (this.props.JSONAttribute) {
             if (this.props.onOpenAction) {
                 onOpen = this.onOpenDropdown;
@@ -232,12 +249,18 @@ export default class AutocompleteMultiselect extends Component {
             if (this.props.onKeyStrokeAction) {
                 onInputChange = this.onInputChange;
             }
+            loading = this.loading;
+
+            loadingText = this.props.loadingText ? this.props.loadingText.value : undefined;
+            // if component is loading, hide options
+            if (this.loading) {
+                options = []
+            }
         }
 
-        // if component is loading, hide options
-        const options = this.loading ? [] : this.options;
+        
 
-        const loadingText = this.props.loadingText ? this.props.loadingText.value : undefined;
+        
 
         return <AutocompleteUI 
                     key = {this.autoCompleteKey}
@@ -255,7 +278,7 @@ export default class AutocompleteMultiselect extends Component {
                     placeholder={placeholder}
                     filterSelectedOptions={this.props.filterSelectedOptions}
                     onOpen = {onOpen}
-                    loading = {this.loading}
+                    loading = {loading}
                     loadingText = {loadingText}
                     onInputChange={onInputChange}
             />;

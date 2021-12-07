@@ -129,7 +129,8 @@
             </property>
             <property key="loadingText" type="expression" required="false">
                 <caption>Loading text</caption>
-                <description>Text to show when loading</description>
+                <description>Only if Data source attribute is used.
+                Text to show when loading</description>
                 <returnType type="String" />
             </property>
             <property key="onOpenAction" type="action" required="false">
@@ -145,13 +146,14 @@
             </property>
             <property key="searchAfterXCharsText" type="expression" required="false">
                 <caption>To few chars text</caption>
-                <description>Custom search: Text to show when to few chars are filled</description>
+                <description>Only if Data source attribute is used.
+                Custom search: Text to show when to few chars are filled</description>
                 <returnType type="String" />
             </property>
             <property key="onKeyStrokeAction" type="action" required="false">
                 <caption>Key stroke action</caption>
                 <description>Only if Data source attribute is used.
-                Custom search: Action to trigger when a key stroke is entered, this flow has to fill in the JSON attribute.</description>
+                Custom search: Action to trigger when a key stroke is entered, this flow has to fill in the JSON attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.</description>
             </property>
             <property key="searchValue" type="attribute" required="false">
                 <caption>Search value</caption>
@@ -163,7 +165,8 @@
             </property>
             <property key="onKeyStrokeActionDelay" type="expression" required="true" defaultValue="500">
                 <caption>Key stroke delay</caption>
-                <description>Custom search: Determines how many ms to wait after the last key stroke to execute the action. Used to determine whether a person is still typing.</description>
+                <description>Only if Data source attribute is used.
+                Custom search: Determines how many ms to wait after the last key stroke to execute the action. Used to determine whether a person is still typing.</description>
                 <returnType type="Integer" />
             </property>
         </propertyGroup>

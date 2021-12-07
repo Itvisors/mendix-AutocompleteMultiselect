@@ -32,6 +32,7 @@
                 <attributeTypes>
                     <attributeType name="String"/>
                     <attributeType name="Integer"/>
+                    <attributeType name="AutoNumber"/>
                 </attributeTypes>
             </property>
             <property key="defaultSelectedAttr" type="attribute" dataSource="dataSourceOptions" required="false">

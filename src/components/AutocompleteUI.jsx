@@ -22,7 +22,7 @@ export class AutocompleteUI extends Component {
         onOpen = {this.props.onOpen}
         loading = {this.props.loading}
         loadingText = {this.props.loadingText}
-        onInputChange={(event, value, reason) => this.props.onInputChange(event, value, reason)}
+        onInputChange={ this.props.onInputChange}
         getOptionSelected={(option, value) => option.title === value.title && option.key === value.key}
         renderOption={(option, { selected }) => (
             <Fragment>

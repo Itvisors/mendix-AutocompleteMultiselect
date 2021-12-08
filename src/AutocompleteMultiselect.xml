@@ -142,7 +142,7 @@
             <property key="searchAfterXChars" type="expression" required="true" defaultValue="0">
                 <caption>Search after X chars</caption>
                 <description>Only if Data source attribute is used.
-                Custom search: Only execute "Key stroke action" after X chars or more are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.</description>
+                Custom search: Only execute "on input change" after X chars or more are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.</description>
                 <returnType type="Integer" />
             </property>
             <property key="searchAfterXCharsText" type="expression" required="false">
@@ -151,23 +151,24 @@
                 Custom search: Text to show when to few chars are filled</description>
                 <returnType type="String" />
             </property>
-            <property key="onKeyStrokeAction" type="action" required="false">
-                <caption>Key stroke action</caption>
+            <property key="onInputChangeAction" type="action" required="false">
+                <caption>On input change</caption>
                 <description>Only if Data source attribute is used.
-                Custom search: Action to trigger when a key stroke is entered, this flow has to fill in the JSON attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.</description>
+                Custom search: Action to trigger when the input value is changed, this flow has to fill in the JSON attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.
+                Note that this action is also executed after an option is selected or when the dropdown is closed, since the input value will be cleared.</description>
             </property>
             <property key="searchValue" type="attribute" required="false">
                 <caption>Search value</caption>
                 <description>Only if Data source attribute is used.
-                Custom search: attribute used to store the search value that can be used in the key stroke action. Make sure the user has got write access.</description>
+                Custom search: attribute used to store the input value that can be used in the on input change action. Make sure the user has got write access.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
-            <property key="onKeyStrokeActionDelay" type="expression" required="true" defaultValue="500">
-                <caption>Key stroke delay</caption>
+            <property key="onInputChangeDelay" type="expression" required="true" defaultValue="500">
+                <caption>Input change delay</caption>
                 <description>Only if Data source attribute is used.
-                Custom search: Determines how many ms to wait after the last key stroke to execute the action. Used to determine whether a person is still typing.</description>
+                Custom search: Determines how many ms to wait after the last input change to execute the action. Used to determine whether a person is still typing.</description>
                 <returnType type="Integer" />
             </property>
         </propertyGroup>

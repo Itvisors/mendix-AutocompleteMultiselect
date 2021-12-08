@@ -44,11 +44,14 @@ export default class AutocompleteMultiselect extends Component {
         // Check if data sourse or attribute is used
         if (this.props.JSONAttribute) {
             if (this.props.JSONAttribute.status === 'available') { 
+                // check if the items has been changed or data needs to be refreshed
                 if (this.refreshData || this.props.JSONAttribute !== prevProps.JSONAttribute) {
                     let dataParsed = [];
+                    // parse the json
                     if (this.props.JSONAttribute.value && this.props.JSONAttribute.value !== '') {
                         dataParsed = JSON.parse(this.props.JSONAttribute.value);
                     }
+                    // if data needs to be refreshed, reset defaults
                     if (this.refreshData) {
                         let defaultValue = dataParsed.filter(option => option.default);
                         if (this.props.multiple) {
@@ -57,11 +60,17 @@ export default class AutocompleteMultiselect extends Component {
                             this.optionsSelected = defaultValue[0];
                         }
                     } else {
-                        if (this.props.onKeyStrokeAction) {
+                        // If custom search is used, it can be that some options are not in the JSON
+                        // Add these options to make sure the defaults are in, they will be filtered out if not applicable to input value
+                        if (this.props.onInputChangeAction) {
                             let optionsSelectedNotInList = this.optionsSelected.filter(selectedOption => {
                                 return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) === undefined;
                             })
                             dataParsed = dataParsed.concat(optionsSelectedNotInList);
+                        } else {// Else check if optionSelected are still available. This is done since it can be the case that the options have been changed.
+                            this.optionsSelected = this.optionsSelected.filter(selectedOption => {
+                                return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) !== undefined;
+                            })
                         }
                     }
                     this.options = dataParsed;
@@ -182,18 +191,24 @@ export default class AutocompleteMultiselect extends Component {
      * Function calles when dropdown is opened
      */
     openDropdown() {
-        this.loading = true;
+        let setLoading = false;
+        
         // check if enough chars are filled
-        if (this.props.onKeyStrokeAction) {
+        if (this.props.onInputChangeAction) {
             if (this.props.searchAfterXChars.value && this.props.searchAfterXChars.value > 0) {
                 this.showToFewCharsText = true;
+                setLoading = true;
             }
         }
         if (this.props.onOpenAction && this.props.onOpenAction.canExecute) {
             this.props.onOpenAction.execute();
+            setLoading = true;
         } 
-        // Rerender widget
-        this.setState({updateDate: new Date()}); 
+        if (setLoading) {
+            // Rerender widget
+            this.loading = true;
+            this.setState({updateDate: new Date()}); 
+        }
     }
 
     /**
@@ -214,22 +229,17 @@ export default class AutocompleteMultiselect extends Component {
                     if (this.props.searchValue) {
                         this.props.searchValue.setValue(value);
                     }
-                    // Do not call action when widget is closed 
-                    if (reason !== 'reset') {
-                        if (this.props.onKeyStrokeAction && this.props.onKeyStrokeAction.canExecute) {
-                            this.props.onKeyStrokeAction.execute();
-                        }
+                    if (this.props.onInputChangeAction && this.props.onInputChangeAction.canExecute) {
+                        this.props.onInputChangeAction.execute();
                     }
                 }
-            }, this.props.onKeyStrokeActionDelay.value, timeStamp, value, reason)
+            }, this.props.onInputChangeDelay.value, timeStamp, value, reason)
         } else {
             this.showToFewCharsText = true;
         }
-        if (reason !== 'reset') {
-            this.loading = true;
-            // make sure to rerender the widget
-            this.setState({updateDate: new Date()});
-        }
+        this.loading = true;
+        // make sure to rerender the widget
+        this.setState({updateDate: new Date()});
     }
 
     render() {

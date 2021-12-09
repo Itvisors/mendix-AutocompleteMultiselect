@@ -138,16 +138,6 @@
                 <caption>On Open Action</caption>
                 <description>Action to trigger when the widget is opened, this flow has to fill in the data source attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.</description>
             </property>
-            <property key="searchAfterXChars" type="expression" required="true" defaultValue="0">
-                <caption>Search after X chars</caption>
-                <description>Custom search: Only execute "on input change" after X chars or more are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.</description>
-                <returnType type="Integer" />
-            </property>
-            <property key="searchAfterXCharsText" type="expression" required="false">
-                <caption>To few chars text</caption>
-                <description>Custom search: Text to show when to few chars are filled</description>
-                <returnType type="String" />
-            </property>
             <property key="onInputChangeAction" type="action" required="false">
                 <caption>On input change</caption>
                 <description>Custom search: Action to trigger when the input value is changed, this flow has to fill in the JSON attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.
@@ -160,6 +150,16 @@
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
+            </property>
+            <property key="searchAfterXChars" type="expression" required="true" defaultValue="0">
+                <caption>Search after X chars</caption>
+                <description>Custom search: Only execute "on input change" after X chars or more are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.</description>
+                <returnType type="Integer" />
+            </property>
+            <property key="searchAfterXCharsText" type="expression" required="false">
+                <caption>To few chars text</caption>
+                <description>Custom search: Text to show when to few chars are filled</description>
+                <returnType type="String" />
             </property>
             <property key="onInputChangeDelay" type="expression" required="true" defaultValue="500">
                 <caption>Input change delay</caption>

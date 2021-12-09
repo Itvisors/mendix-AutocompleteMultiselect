@@ -95,11 +95,11 @@ export default class AutocompleteMultiselect extends Component {
 
                     // Map the options and get the selected ones
                     this.options = this.props.dataSourceOptions.items.map(item => {
-                        const optionTitle = this.props.titleAttr(item).value;
+                        const optionTitle = this.props.titleAttr.get(item).value;
                         const option = {title: optionTitle};
                         //If key is used, add key to the option
                         if (this.props.keyAttr) {
-                            option.key = this.props.keyAttr(item).value;
+                            option.key = this.props.keyAttr.get(item).value;
                         }
                         // If data needs to be refreshed, get default options
                         if (this.refreshData) {
@@ -121,7 +121,7 @@ export default class AutocompleteMultiselect extends Component {
                             if (defaultSelectedString !== null) {
                                 isItemDefaultSelected = defaultSelectedString.indexOf(optionTitle) !== -1;
                             } else {
-                                isItemDefaultSelected = this.props.defaultSelectedAttr && this.props.defaultSelectedAttr(item).value;
+                                isItemDefaultSelected = this.props.defaultSelectedAttr && this.props.defaultSelectedAttr.get(item).value;
                             }
                             if (isItemDefaultSelected) {
                                 if (multiSelect) {
@@ -272,7 +272,7 @@ export default class AutocompleteMultiselect extends Component {
         let options = this.options;
         if (this.props.JSONAttribute) {
             onOpen = this.onOpenDropdown;
-            if (this.props.onKeyStrokeAction) {
+            if (this.props.onInputChangeAction) {
                 onInputChange = this.onInputChange;
             }
             loading = this.loading;

@@ -22,7 +22,7 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.18.3"
+    "@mendix/pluggable-widgets-tools": "^9.6.1"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",

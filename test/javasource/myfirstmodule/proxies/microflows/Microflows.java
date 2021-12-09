@@ -29,6 +29,13 @@ public class Microflows
 		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
 		Core.microflowCall("MyFirstModule.ACT_AutocompleteHelper_FillJSON").withParams(params).execute(context);
 	}
+	public static void aCT_Book_DeleteForDSAttribute(IContext context, myfirstmodule.proxies.Book _book, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Book", _book == null ? null : _book.getMendixObject());
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.ACT_Book_DeleteForDSAttribute").withParams(params).execute(context);
+	}
 	public static void aCT_Book_Save(IContext context, myfirstmodule.proxies.Book _book)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -130,6 +137,12 @@ public class Microflows
 		params.put("AutocompletHelper", _autocompletHelper == null ? null : _autocompletHelper.getMendixObject());
 		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
 		Core.microflowCall("MyFirstModule.SUB_AutocompleteHelper_FillJSONWithDefaults").withParams(params).execute(context);
+	}
+	public static void sUB_Collection_RefreshJSON(IContext context, myfirstmodule.proxies.Collection _collection)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
+		Core.microflowCall("MyFirstModule.SUB_Collection_RefreshJSON").withParams(params).execute(context);
 	}
 	public static void sUB_Collection_SetDefaultString(IContext context, myfirstmodule.proxies.Collection _collection)
 	{

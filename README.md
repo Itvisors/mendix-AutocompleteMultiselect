@@ -7,6 +7,8 @@ Widget that can be used to select one or many options from a dropdown. The user 
 - User can search easily for the correct option
 - Limit the tags to show in the front-end
 - Styling options
+- Load data only after opening the dropdown
+- Load data only after filling in x chars
 
 ## Usage
 The widget needs a context object to work to be able to store the response. You can choose to make this object non-persistent. Configure the data source to retrieve the options to show in the dropdown and select which attribute can be used as title. If you want some options to be selected when rendering the widget, also choose the attribute that can be used for the default selection property. Sometimes you need the options to be non-persistent, e.g. when the default selected attribute is user specific and can therefore not be stored in the database. After these options are configured, the onchange event can be setup when needed and other options can be set that influence the behavior and layout of the widget. When the value(s) in the dropdown are changed, the response attribute is set and can be used to do what you want, e.g. set an association. If "No close on select" is set to true, the onchange action is triggered many times in a short time and can interfere. Therefore it is adviced in this case to map the response only when needed, e.g. when hitting save.
@@ -39,3 +41,23 @@ The widget needs a context object to work to be able to store the response. You 
 - Label: Other way to display the label, within the widget.
 - Variant: How the text field will be styled, either standard or outlined.
 - Checkboxes: Whether or not to show checkboxes in front of the options.
+
+### Data source attribute
+- Data source attribute: This property will overrule the data source and default selected properties. Attribute should contain the list of items to be shown in the widget in the JSON format ([{"title":"title1", "key":"key1", "default":true}]), where default and key are optional.
+Can be used when the items are non-persistent and you don't want to keep them in cache or when you only want to load items when the widget is selected or X chars are filled in.
+
+****Below properties are only available if this property is used.****
+- Loading text: Text to show when loading
+- On Open Action: Action to trigger when the widget is opened, this flow has to fill in the data source attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.
+
+**_Custom search_**
+- On input change: Action to trigger when the input value is changed, this flow has to fill in the JSON attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.
+- Search value: attribute used to store the input value that can be used in the on input change action. Make sure the user has got write access.
+- Search after X chars: Only execute "on input change" after X chars or more are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.
+- To few chars text: Text to show when to few chars are filled
+Note that this action is also executed after an option is selected or when the dropdown is closed, since the input value will be cleared. 
+If you use this property and Search after X chars is set to 0, you might want to also use the on open action.
+- Input change delay: Determines how many ms to wait after the last input change to execute the action. Used to determine whether a person is still typing.
+
+#### Known issues
+- Loading indicator keeps showing: Make sure you refresh the object in the on open action and on input change. This is needed since in some cases the option list won't change. Refreshing the object lets the widget know it is done loading.

@@ -51,12 +51,11 @@ Can be used when the items are non-persistent and you don't want to keep them in
 - On Open Action: Action to trigger when the widget is opened, this flow has to fill in the data source attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.
 
 **_Custom search_**
-- On input change: Action to trigger when the input value is changed, this flow has to fill in the JSON attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change.
+- On input change: Action to trigger when the input value is changed, this flow has to fill in the JSON attribute. Make sure to refresh the object, otherwise the loading state will remain visible when options did not change. Note that this action is also executed after an option is selected or when the dropdown is closed, since the input value will be cleared. 
+If you use this property and Search after X chars is set to 0, you might want to also use the on open action.
 - Search value: attribute used to store the input value that can be used in the on input change action. Make sure the user has got write access.
 - Search after X chars: Only execute "on input change" after X chars or more are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.
 - To few chars text: Text to show when to few chars are filled
-Note that this action is also executed after an option is selected or when the dropdown is closed, since the input value will be cleared. 
-If you use this property and Search after X chars is set to 0, you might want to also use the on open action.
 - Input change delay: Determines how many ms to wait after the last input change to execute the action. Used to determine whether a person is still typing.
 
 #### Known issues

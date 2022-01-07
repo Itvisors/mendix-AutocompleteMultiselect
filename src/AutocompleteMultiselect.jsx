@@ -56,7 +56,7 @@ export default class AutocompleteMultiselect extends Component {
                         if (this.props.multiple) {
                             this.optionsSelected = defaultValue;
                         } else {
-                            this.optionsSelected = defaultValue[0];
+                            this.optionsSelected = defaultValue[0] === undefined ? null : defaultValue[0];
                         }
                     } else {
                         // If custom search is used, it can be that some options are not in the JSON
@@ -72,7 +72,7 @@ export default class AutocompleteMultiselect extends Component {
                                 this.optionsSelected = this.optionsSelected.filter(selectedOption => {
                                     return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) !== undefined;
                                 });
-                            } else if (this.optionsSelected !== undefined) {
+                            } else if (this.optionsSelected !== null) {
                                 this.optionsSelected = dataParsed.find(option => option.title === this.optionsSelected.title && option.key === this.optionsSelected.key);
                             } if (this.optionsSelected === undefined) {
                                 this.optionsSelected = null;

@@ -2,8 +2,7 @@ import { Component, createElement } from "react";
 
 import "./ui/AutocompleteMultiselect.css";
 
-import { AutocompleteUI } from './components/AutocompleteUI';
-
+import { AutocompleteUI } from "./components/AutocompleteUI";
 
 export default class AutocompleteMultiselect extends Component {
     constructor(props) {
@@ -25,35 +24,35 @@ export default class AutocompleteMultiselect extends Component {
         this.loading = true;
 
         this.showToFewCharsText = false;
-        
+
         this.latestInputChange = undefined;
     }
 
-    componentDidUpdate (prevProps) {
+    componentDidUpdate(prevProps) {
         let refreshState = false;
 
         // Refresh the data if the refreshAttribute has been set to true
-        if(prevProps.refreshAttribute && this.props.refreshAttribute.value && !prevProps.refreshAttribute.value) {
+        if (prevProps.refreshAttribute && this.props.refreshAttribute.value && !prevProps.refreshAttribute.value) {
             this.props.refreshAttribute.setValue(false);
             this.autoCompleteKey++;
             // Make sure data and state will be refreshed
             this.refreshData = true;
-            refreshState = true; 
+            refreshState = true;
         }
 
         // Check if data sourse or attribute is used
         if (this.props.JSONAttribute) {
-            if (this.props.JSONAttribute.status === 'available') { 
+            if (this.props.JSONAttribute.status === "available") {
                 // check if the items has been changed or data needs to be refreshed
                 if (this.refreshData || this.props.JSONAttribute !== prevProps.JSONAttribute) {
                     let dataParsed = [];
                     // parse the json
-                    if (this.props.JSONAttribute.value && this.props.JSONAttribute.value !== '') {
+                    if (this.props.JSONAttribute.value && this.props.JSONAttribute.value !== "") {
                         dataParsed = JSON.parse(this.props.JSONAttribute.value);
                     }
                     // if data needs to be refreshed, reset defaults
                     if (this.refreshData) {
-                        let defaultValue = dataParsed.filter(option => option.default);
+                        const defaultValue = dataParsed.filter(option => option.default);
                         if (this.props.multiple) {
                             this.optionsSelected = defaultValue;
                         } else {
@@ -63,31 +62,38 @@ export default class AutocompleteMultiselect extends Component {
                         // If custom search is used, it can be that some options are not in the JSON
                         // Add these options to make sure the defaults are in, they will be filtered out if not applicable to input value
                         if (this.props.onInputChangeAction) {
-                            let optionsSelectedNotInList = this.optionsSelected.filter(selectedOption => {
+                            const optionsSelectedNotInList = this.optionsSelected.filter(selectedOption => {
                                 return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) === undefined;
-                            })
+                            });
                             dataParsed = dataParsed.concat(optionsSelectedNotInList);
-                        } else {// Else check if optionSelected are still available. This is done since it can be the case that the options have been changed.
-                            this.optionsSelected = this.optionsSelected.filter(selectedOption => {
-                                return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) !== undefined;
-                            })
+                        } else {
+                            if (this.props.multiple) {
+                                // Else check if optionSelected are still available. This is done since it can be the case that the options have been changed.
+                                this.optionsSelected = this.optionsSelected.filter(selectedOption => {
+                                    return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) !== undefined;
+                                });
+                            } else if (this.optionsSelected !== undefined) {
+                                this.optionsSelected = dataParsed.find(option => option.title === this.optionsSelected.title && option.key === this.optionsSelected.key);
+                            } if (this.optionsSelected === undefined) {
+                                this.optionsSelected = null;
+                            }
                         }
                     }
                     this.options = dataParsed;
-                    
+
                     refreshState = true;
                     this.initialized = true;
                     this.refreshData = false;
                     // Store response in responseAttribute
-                    this.props.responseAttribute.setValue(JSON.stringify(this.optionsSelected)); 
+                    this.props.responseAttribute.setValue(JSON.stringify(this.optionsSelected));
                     this.loading = false;
                 }
             }
-        } else if (this.props.dataSourceOptions !== prevProps.dataSourceOptions) { // Check if the datasource has been loaded
+        } else if (this.props.dataSourceOptions !== prevProps.dataSourceOptions) {
+            // Check if the datasource has been loaded
             if (this.props.dataSourceOptions.status === 'available') {
                 // If the items have been changed or if date needs to be refreshed, change the options
-                if (this.refreshData ||
-                    this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
+                if (this.refreshData || this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
                     let warningGiven = false;
                     const multiSelect = this.props.multiple;
                     let optionsSelected = multiSelect ? [] : null;
@@ -110,7 +116,7 @@ export default class AutocompleteMultiselect extends Component {
                                         defaultSelectedString = JSON.parse(this.props.defaultSelectedStringAttr.value);;
                                     } catch (e) {
                                         defaultSelectedString = [];
-                                    }                                    
+                                    }
                                 } else {
                                     // set to null to not check this for every item again
                                     defaultSelectedString = null;

@@ -62,7 +62,10 @@ export default class AutocompleteMultiselect extends Component {
                         // If custom search is used, it can be that some options are not in the JSON
                         // Add these options to make sure the defaults are in, they will be filtered out if not applicable to input value
                         if (this.props.onInputChangeAction) {
-                            const optionsSelectedNotInList = this.optionsSelected.filter(selectedOption => {
+                            const optionsSelectedAsArray = this.props.multiple
+                                ? this.optionsSelected
+                                : this.optionsSelected === null ? [] : [this.optionsSelected];
+                            const optionsSelectedNotInList = optionsSelectedAsArray.filter(selectedOption => {
                                 return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) === undefined;
                             });
                             dataParsed = dataParsed.concat(optionsSelectedNotInList);
@@ -102,7 +105,7 @@ export default class AutocompleteMultiselect extends Component {
                     // Map the options and get the selected ones
                     this.options = this.props.dataSourceOptions.items.map(item => {
                         const optionTitle = this.props.titleAttr.get(item).value;
-                        const option = {title: optionTitle};
+                        const option = { title: optionTitle };
                         //If key is used, add key to the option
                         if (this.props.keyAttr) {
                             option.key = this.props.keyAttr.get(item).value;
@@ -169,7 +172,7 @@ export default class AutocompleteMultiselect extends Component {
         }
 
         if (refreshState) {
-            this.setState({updateDate: new Date()});
+            this.setState({ updateDate: new Date() });
         }
     }
 
@@ -184,13 +187,13 @@ export default class AutocompleteMultiselect extends Component {
     changeValues(event, newValue, reason, details) {
         // Store response in responseAttribute and call on change action
         this.props.responseAttribute.setValue(JSON.stringify(newValue));
-        
+
         if (this.props.onChangeAction && this.props.onChangeAction.canExecute) {
             this.props.onChangeAction.execute();
         }
         // Update the widget with the new values selected
         this.optionsSelected = newValue;
-        this.setState({updateDate: new Date()}); 
+        this.setState({ updateDate: new Date() });
     }
 
     /**
@@ -198,22 +201,24 @@ export default class AutocompleteMultiselect extends Component {
      */
     openDropdown() {
         let setLoading = false;
-        
-        // check if enough chars are filled
         if (this.props.onInputChangeAction) {
+            // check if enough chars are filled
             if (this.props.searchAfterXChars.value && this.props.searchAfterXChars.value > 0) {
-                this.showToFewCharsText = true;
-                setLoading = true;
+                //For single select, search value is still filled
+                if (!this.props.searchValue.value || this.props.searchValue.value.length < this.props.searchAfterXChars.value) {
+                    this.showToFewCharsText = true;
+                    setLoading = true;
+                }
             }
         }
         if (this.props.onOpenAction && this.props.onOpenAction.canExecute) {
             this.props.onOpenAction.execute();
             setLoading = true;
-        } 
+        }
         if (setLoading) {
             // Rerender widget
             this.loading = true;
-            this.setState({updateDate: new Date()}); 
+            this.setState({ updateDate: new Date() });
         }
     }
 
@@ -224,50 +229,57 @@ export default class AutocompleteMultiselect extends Component {
      * @param {*} value - the new value of the input
      * @param {*} reason - the reason that this action is triggered, either input, clear or reset
      */
-    inputChange = (event, value, reason)  => {
-        if (this.props.searchAfterXChars.value === undefined || value.length >= this.props.searchAfterXChars.value) {
-            this.showToFewCharsText = false;
-            const timeStamp = event.timeStamp
-            this.latestInputChange = timeStamp;
-            //Check if no other inputchange will be done
-            setTimeout((timeStamp, value, reason) => {
-                if (this.latestInputChange === timeStamp) {
+    inputChange = (event, value, reason) => {
+        const timeStamp = event ? event.timeStamp : undefined;
+        this.latestInputChange = timeStamp;
+        //Check if no other inputchange will be done
+        setTimeout((timeStamp, value, reason) => {
+            if (this.latestInputChange === timeStamp) {
+                const enoughCharsFilled = (this.props.searchAfterXChars.value === undefined || value.length >= this.props.searchAfterXChars.value);
+                // Also set value if it is cleared
+                if (enoughCharsFilled || value.length === 0) {
                     if (this.props.searchValue) {
                         this.props.searchValue.setValue(value);
                     }
+                }
+                if (enoughCharsFilled) {
+                    this.showToFewCharsText = false;
                     if (this.props.onInputChangeAction && this.props.onInputChangeAction.canExecute) {
                         this.props.onInputChangeAction.execute();
                     }
+                } else {
+                    this.showToFewCharsText = true;
+                    // update state since it is after timeout
+                    this.setState({ updateDate: new Date() });
                 }
-            }, this.props.onInputChangeDelay.value, timeStamp, value, reason)
-        } else {
-            this.showToFewCharsText = true;
-        }
+            }
+        }, this.props.onInputChangeDelay.value, timeStamp, value, reason)
+
         this.loading = true;
         // make sure to rerender the widget
-        this.setState({updateDate: new Date()});
+        this.setState({ updateDate: new Date() });
     }
 
     render() {
         // Do not render the widget if it is not initialized yet
-        if(!this.initialized) {
+        if (!this.initialized) {
             return ''
         }
 
         // If the disabled property is not filled, the widget will be editable
         let disabled = this.props.editable ? !this.props.editable.value : false;
         // Check if user has rights on response attribute
-        if(!disabled && this.props.responseAttribute.readOnly) {
+        if (!disabled && this.props.responseAttribute.readOnly) {
             console.warn('Autocomplete Multiselect: User has no rights to change the response attribute.')
             disabled = true;
         }
-        
+
         const noOptionsText = this.props.noOptionsText ? this.props.noOptionsText.value : undefined;
 
         const placeholder = this.props.placeholder ? this.props.placeholder.value : undefined;
 
         const limitTags = this.props.limitTags > 0 ? this.props.limitTags : undefined;
-        
+
         const label = this.props.label ? this.props.label.value : undefined;
 
         // Following options only used when json attribute is used
@@ -295,26 +307,26 @@ export default class AutocompleteMultiselect extends Component {
             }
         }
 
-        return <AutocompleteUI 
-                    key = {this.autoCompleteKey}
-                    multiple = {this.props.multiple}
-                    disabled = {disabled}
-                    disableCloseOnSelect = {this.props.disableCloseOnSelect}
-                    options = {options}
-                    value = {this.optionsSelected}
-                    onChange = {this.onChange}
-                    noOptionsText = {noOptionsText}
-                    limitTags={limitTags}
-                    showCheckboxes = {this.props.showCheckboxes}
-                    variant={this.props.variant}
-                    label={label}
-                    placeholder={placeholder}
-                    filterSelectedOptions={this.props.filterSelectedOptions}
-                    onOpen = {onOpen}
-                    loading = {loading}
-                    loadingText = {loadingText}
-                    onInputChange={onInputChange}
-            />;
+        return <AutocompleteUI
+            key={this.autoCompleteKey}
+            multiple={this.props.multiple}
+            disabled={disabled}
+            disableCloseOnSelect={this.props.disableCloseOnSelect}
+            options={options}
+            value={this.optionsSelected}
+            onChange={this.onChange}
+            noOptionsText={noOptionsText}
+            limitTags={limitTags}
+            showCheckboxes={this.props.showCheckboxes}
+            variant={this.props.variant}
+            label={label}
+            placeholder={placeholder}
+            filterSelectedOptions={this.props.filterSelectedOptions}
+            onOpen={onOpen}
+            loading={loading}
+            loadingText={loadingText}
+            onInputChange={onInputChange}
+        />;
     }
 }
 

@@ -66,17 +66,17 @@ export default class AutocompleteMultiselect extends Component {
                                 ? this.optionsSelected
                                 : this.optionsSelected === null ? [] : [this.optionsSelected];
                             const optionsSelectedNotInList = optionsSelectedAsArray.filter(selectedOption => {
-                                return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) === undefined;
+                                return dataParsed.find(option => (option.key.length > 0 || option.title === selectedOption.title) && option.key === selectedOption.key) === undefined;
                             });
                             dataParsed = dataParsed.concat(optionsSelectedNotInList);
                         } else {
                             if (this.props.multiple) {
                                 // Else check if optionSelected are still available. This is done since it can be the case that the options have been changed.
                                 this.optionsSelected = this.optionsSelected.filter(selectedOption => {
-                                    return dataParsed.find(option => option.title === selectedOption.title && option.key === selectedOption.key) !== undefined;
+                                    return dataParsed.find(option => (option.key.length > 0 || option.title === selectedOption.title) && option.key === selectedOption.key) !== undefined;
                                 });
                             } else if (this.optionsSelected !== null) {
-                                this.optionsSelected = dataParsed.find(option => option.title === this.optionsSelected.title && option.key === this.optionsSelected.key);
+                                this.optionsSelected = dataParsed.find(option => (option.key.length > 0 || option.title === this.optionsSelected.title) && option.key === this.optionsSelected.key);
                             } if (this.optionsSelected === undefined) {
                                 this.optionsSelected = null;
                             }
@@ -149,7 +149,7 @@ export default class AutocompleteMultiselect extends Component {
                         } else {
                             // Else check if option is selected (based on the title). This is done since it can be the case that the options have been changed.
                             if (multiSelect) {
-                                if (this.optionsSelected.find(option => option.title === optionTitle)) {
+                                if (this.optionsSelected.find(findoption => (option.key.length > 0 || option.title === value.title) && findoption.key === option.key)) {
                                     optionsSelected.push(option);
                                 }
                             } else if (this.optionsSelected !== null) {

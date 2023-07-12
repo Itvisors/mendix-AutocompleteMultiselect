@@ -23,7 +23,7 @@ export class AutocompleteUI extends Component {
         loading = {this.props.loading}
         loadingText = {this.props.loadingText}
         onInputChange={ this.props.onInputChange}
-        getOptionSelected={(option, value) => (option.key.length> 0 || option.title === value.title) && option.key === value.key}
+        getOptionSelected={(option, value) => ((option.key !== undefined && option.key.length > 0) || option.title === value.title) && option.key === value.key}
         renderOption={(option, { selected }) => (
             <Fragment>
             {this.props.showCheckboxes ? <Checkbox

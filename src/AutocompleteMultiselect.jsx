@@ -149,7 +149,7 @@ export default class AutocompleteMultiselect extends Component {
                         } else {
                             // Else check if option is selected (based on the title). This is done since it can be the case that the options have been changed.
                             if (multiSelect) {
-                                if (this.optionsSelected.find(findoption => (option.key.length > 0 || findoption.title === optionTitle) && findoption.key === option.key)) {
+                                if (this.optionsSelected.find(findoption => ((option.key !== undefined && option.key.length > 0) || findoption.title === optionTitle) && findoption.key === option.key)) {
                                     optionsSelected.push(option);
                                 }
                             } else if (this.optionsSelected !== null) {

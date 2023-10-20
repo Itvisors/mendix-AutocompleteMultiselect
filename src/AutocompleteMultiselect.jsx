@@ -58,6 +58,7 @@ export default class AutocompleteMultiselect extends Component {
                             this.optionsSelected = defaultValue;
                         } else {
                             this.optionsSelected = defaultValue[0] === undefined ? null : defaultValue[0];
+                            this.setState({ inputValue: this.optionsSelected ? this.optionsSelected.title : undefined });
                         }
                     } else {
                         // If custom search is used, it can be that some options are not in the JSON
@@ -78,6 +79,7 @@ export default class AutocompleteMultiselect extends Component {
                                 });
                             } else if (this.optionsSelected !== null) {
                                 this.optionsSelected = dataParsed.find(option => option.title === this.optionsSelected.title && option.key === this.optionsSelected.key);
+                                this.setState({ inputValue: this.optionsSelected.title });
                             } if (this.optionsSelected === undefined) {
                                 this.optionsSelected = null;
                             }
@@ -139,6 +141,7 @@ export default class AutocompleteMultiselect extends Component {
                                 } else {
                                     if (optionsSelected === null) {
                                         optionsSelected = option;
+                                        this.setState({ inputValue: optionTitle });
                                     } else {
                                         if (!warningGiven) {
                                             console.warn("Autocomplete Multiselect: Multiple options are set as default for a single select. First option is set as the selected one.");
@@ -156,6 +159,7 @@ export default class AutocompleteMultiselect extends Component {
                             } else if (this.optionsSelected !== null) {
                                 if (this.optionsSelected.title === optionTitle) {
                                     optionsSelected = option;
+                                    this.setState({ inputValue: optionTitle });
                                 }
                             }
                         }

@@ -5,14 +5,18 @@
   "description": "Auto complete widget where multiple options can be selected. Based on https://material-ui.com/components/autocomplete/",
   "copyright": "ITvisors (2020)",
   "author": "Johan Munneke",
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "Apache-2.0",
   "config": {
-    "projectPath": "./test/",
+    "projectPath": "./Test",
     "mendixHost": "http://localhost:8080",
-    "developmentPort": "3000"
+    "developmentPort": 3000
   },
   "packagePath": "itvisors",
   "scripts": {
-    "start": "pluggable-widgets-tools start:server --open",
+    "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",
@@ -20,13 +24,21 @@
     "prerelease": "npm run lint",
     "release": "pluggable-widgets-tools release:web"
   },
-  "license": "Apache-2.0",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^9.6.1"
+    "@mendix/pluggable-widgets-tools": "^9.24.1"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "classnames": "^2.2.6"
+  },
+  "resolutions": {
+    "react": "18.2.0",
+    "react-native": "0.70.7"
+  },
+  "overrides": {
+    "react": "18.2.0",
+    "react-native": "0.70.7"
   }
 }
+

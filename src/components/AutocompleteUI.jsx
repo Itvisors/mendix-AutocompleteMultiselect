@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 export class AutocompleteUI extends Component {
   render() {
     return <Autocomplete 
+        inputValue={this.props.inputValue}
         key = {this.props.key}
         multiple = {this.props.multiple}
         size="small"

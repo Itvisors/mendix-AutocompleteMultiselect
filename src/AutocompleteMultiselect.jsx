@@ -8,7 +8,8 @@ export default class AutocompleteMultiselect extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            updateDate: null
+            updateDate: null,
+            inputValue: ""
         };
         this.autoCompleteKey = 0;
         this.onChange = this.changeValues.bind(this);
@@ -230,32 +231,38 @@ export default class AutocompleteMultiselect extends Component {
      * @param {*} reason - the reason that this action is triggered, either input, clear or reset
      */
     inputChange = (event, value, reason) => {
-        const timeStamp = event ? event.timeStamp : undefined;
-        this.latestInputChange = timeStamp;
-        //Check if no other inputchange will be done
-        setTimeout((timeStamp, value, reason) => {
-            if (this.latestInputChange === timeStamp) {
-                const enoughCharsFilled = (this.props.searchAfterXChars.value === undefined || value.length >= this.props.searchAfterXChars.value);
-                // Also set value if it is cleared
-                if (enoughCharsFilled || value.length === 0) {
-                    if (this.props.searchValue) {
-                        this.props.searchValue.setValue(value);
+        if (this.props.JSONAttribute) {
+            if (this.props.onInputChangeAction) {
+                const timeStamp = event ? event.timeStamp : undefined;
+                this.latestInputChange = timeStamp;
+                //Check if no other inputchange will be done
+                setTimeout((timeStamp, value, reason) => {
+                    if (this.latestInputChange === timeStamp) {
+                        const enoughCharsFilled = (this.props.searchAfterXChars.value === undefined || value.length >= this.props.searchAfterXChars.value);
+                        // Also set value if it is cleared
+                        if (enoughCharsFilled || value.length === 0) {
+                            if (this.props.searchValue) {
+                                this.props.searchValue.setValue(value);
+                            }
+                        }
+                        if (enoughCharsFilled) {
+                            this.showToFewCharsText = false;
+                            if (this.props.onInputChangeAction && this.props.onInputChangeAction.canExecute) {
+                                this.props.onInputChangeAction.execute();
+                            }
+                        } else {
+                            this.showToFewCharsText = true;
+                        }
                     }
-                }
-                if (enoughCharsFilled) {
-                    this.showToFewCharsText = false;
-                    if (this.props.onInputChangeAction && this.props.onInputChangeAction.canExecute) {
-                        this.props.onInputChangeAction.execute();
-                    }
-                } else {
-                    this.showToFewCharsText = true;
-                    // update state since it is after timeout
-                    this.setState({ updateDate: new Date() });
-                }
-            }
-        }, this.props.onInputChangeDelay.value, timeStamp, value, reason)
+                }, this.props.onInputChangeDelay.value, timeStamp, value, reason)
 
-        this.loading = true;
+                this.loading = true;
+            }
+        }
+        // Bug in library when input value is changed during loading the on open action, the inputvalue is reset after data is returned
+        if (event || reason !== "reset") {
+            this.setState({ inputValue: value });
+        }
         // make sure to rerender the widget
         this.setState({ updateDate: new Date() });
     }
@@ -284,17 +291,12 @@ export default class AutocompleteMultiselect extends Component {
 
         // Following options only used when json attribute is used
         let onOpen = undefined;
-        let onInputChange = undefined;
         let loading = undefined;
         let loadingText = undefined;
         let options = this.options;
         if (this.props.JSONAttribute) {
             onOpen = this.onOpenDropdown;
-            if (this.props.onInputChangeAction) {
-                onInputChange = this.onInputChange;
-            }
             loading = this.loading;
-
             // set loading text, if to few chars are filled use this text.
             if (this.showToFewCharsText) {
                 loadingText = this.props.searchAfterXCharsText ? this.props.searchAfterXCharsText.value : "Enter at least " + this.props.searchAfterXChars.value + " characters";
@@ -325,7 +327,8 @@ export default class AutocompleteMultiselect extends Component {
             onOpen={onOpen}
             loading={loading}
             loadingText={loadingText}
-            onInputChange={onInputChange}
+            onInputChange={this.onInputChange}
+            inputValue={this.state.inputValue}
         />;
     }
 }

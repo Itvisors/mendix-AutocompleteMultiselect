@@ -79,7 +79,7 @@ export default class AutocompleteMultiselect extends Component {
                                 });
                             } else if (this.optionsSelected !== null) {
                                 this.optionsSelected = dataParsed.find(option => option.title === this.optionsSelected.title && option.key === this.optionsSelected.key);
-                                this.setState({ inputValue: this.optionsSelected.title });
+                                this.setState({ inputValue: this.optionsSelected ? this.optionsSelected.title : undefined })
                             } if (this.optionsSelected === undefined) {
                                 this.optionsSelected = null;
                             }

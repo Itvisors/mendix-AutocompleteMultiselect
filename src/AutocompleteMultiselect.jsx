@@ -95,7 +95,7 @@ export default class AutocompleteMultiselect extends Component {
                     this.loading = false;
                 }
             }
-        } else if (this.props.dataSourceOptions !== prevProps.dataSourceOptions) {
+        } else if (this.refreshData || this.props.dataSourceOptions !== prevProps.dataSourceOptions) {
             // Check if the datasource has been loaded
             if (this.props.dataSourceOptions.status === 'available') {
                 // If the items have been changed or if date needs to be refreshed, change the options

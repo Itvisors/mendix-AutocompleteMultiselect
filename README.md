@@ -27,7 +27,7 @@ The widget needs a context object to work to be able to store the response. You 
 ### Events
 - On Change Action: Action to trigger when an option is selected or deselected. Since this action is triggered for every change and this can happen quite fast if "No close on select" is set to true, it is wise to keep this action very short. If this combination is used, the response can best be mapped when used e.g. on save.
 - Response: Attribute where the selected items are stored in json format ([{"title":"example1"}] for multiselect and {"title":"example1"} for single select). User needs write access on this attribute.
-- Refresh: Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got write access. Widget will only be reset when the context object is refreshed.
+- Refresh: Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got write access. Widget will only be reset when the context object is refreshed. Make sure you use this context object in your datasource.
 
 
 ### Behavior
@@ -60,3 +60,4 @@ If you use this property and Search after X chars is set to 0, you might want to
 
 #### Known issues
 - Loading indicator keeps showing: Make sure you refresh the object in the on open action and on input change. This is needed since in some cases the option list won't change. Refreshing the object lets the widget know it is done loading.
+- Options do not refresh when refresh set to tru: Make sure you refresh the context object and this context object is used in your datasource.

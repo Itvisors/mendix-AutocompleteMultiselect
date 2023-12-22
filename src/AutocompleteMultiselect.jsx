@@ -18,6 +18,7 @@ export default class AutocompleteMultiselect extends Component {
         this.options = [];
         this.optionsSelected = []; // Array for multiselect, otherwise object
         this.initialized = false;
+        this.searchValue = "";
 
         // Initialize to true to make sure data is retrieved when initializing widget
         this.refreshData = true;
@@ -117,9 +118,9 @@ export default class AutocompleteMultiselect extends Component {
                 // If the items have been changed or if date needs to be refreshed, change the options
                 if (this.refreshData || this.props.dataSourceOptions.items !== prevProps.dataSourceOptions.items) {
                     let warningGiven = false;
-                    const multiSelect = this.props.multiple;
-                    let optionsSelected = multiSelect ? [] : null;
+                    let optionsSelected = this.props.multiple ? [] : null;
                     let defaultSelectedString;
+                    let inputValueNew = "";
 
                     // Map the options and get the selected ones
                     this.options = this.props.dataSourceOptions.items.map(item => {
@@ -153,12 +154,12 @@ export default class AutocompleteMultiselect extends Component {
                                     this.props.defaultSelectedAttr && this.props.defaultSelectedAttr.get(item).value;
                             }
                             if (isItemDefaultSelected) {
-                                if (multiSelect) {
+                                if (this.props.multiple) {
                                     optionsSelected.push(option);
                                 } else {
                                     if (optionsSelected === null) {
                                         optionsSelected = option;
-                                        this.setState({ inputValue: optionTitle ?? "" });
+                                        inputValueNew = optionTitle ?? "" ;
                                     } else {
                                         if (!warningGiven) {
                                             console.warn(
@@ -171,9 +172,9 @@ export default class AutocompleteMultiselect extends Component {
                             }
                         } else {
                             // Else check if option is selected (based on the title). This is done since it can be the case that the options have been changed.
-                            if (multiSelect) {
+                            if (this.props.multiple) {
                                 if (this.optionsSelected.find(OptionLoop => OptionLoop.title === optionTitle)) {
-                                    optionsSelected.push(OptionLoop);
+                                    optionsSelected.push(option);
                                 }
                             } else if (this.optionsSelected !== null) {
                                 if (this.optionsSelected.title === optionTitle) {
@@ -184,6 +185,9 @@ export default class AutocompleteMultiselect extends Component {
                         }
                         return option;
                     });
+                    if (this.refreshData) {
+                        this.setState({ inputValue: inputValueNew });
+                    }
                     refreshState = true;
                     this.initialized = true;
                     this.refreshData = false;
@@ -217,6 +221,12 @@ export default class AutocompleteMultiselect extends Component {
         }
         // Update the widget with the new values selected
         this.optionsSelected = newValue;
+        // If filter value must be kept, restore the value after a value is selected/removed
+        if (this.props.keepFilterValueAfterSelect && this.props.multiple) {
+            if (reason !== "blur") {
+                this.setState({ inputValue: this.searchValue ?? "" });
+            }
+        }
         this.setState({ updateDate: new Date() });
     }
 
@@ -257,46 +267,62 @@ export default class AutocompleteMultiselect extends Component {
      * @param {*} reason - the reason that this action is triggered, either input, clear or reset
      */
     inputChange = (event, value, reason) => {
-        if (this.props.JSONAttribute) {
-            if (this.props.onInputChangeAction) {
-                const timeStamp = event ? event.timeStamp : undefined;
-                this.latestInputChange = timeStamp;
-                //Check if no other inputchange will be done
-                setTimeout(
-                    () => {
-                        if (this.latestInputChange === timeStamp) {
-                            const enoughCharsFilled =
-                                this.props.searchAfterXChars.value === undefined ||
-                                value.length >= this.props.searchAfterXChars.value;
-                            // Also set value if it is cleared
-                            if (enoughCharsFilled || value.length === 0) {
-                                if (this.props.searchValue) {
-                                    this.props.searchValue.setValue(value);
+        // Do not trigger if there is a searchvalue and option is selected or removed, this will reset the value
+        if (
+            !this.props.keepFilterValueAfterSelect ||
+            !this.props.multiple ||
+            reason === "clear" ||
+            (event && event.type !== "click")
+        ) {
+            if (this.props.JSONAttribute) {
+                if (this.props.onInputChangeAction) {
+                    const timeStamp = event ? event.timeStamp : undefined;
+                    this.latestInputChange = timeStamp;
+                    //Check if no other inputchange will be done
+                    setTimeout(
+                        () => {
+                            if (this.latestInputChange === timeStamp) {
+                                const enoughCharsFilled =
+                                    this.props.searchAfterXChars.value === undefined ||
+                                    value.length >= this.props.searchAfterXChars.value;
+                                // Also set value if it is cleared
+                                if (enoughCharsFilled || value.length === 0) {
+                                    if (this.props.searchValue) {
+                                        this.props.searchValue.setValue(value);
+                                    }
+                                }
+                                if (enoughCharsFilled) {
+                                    this.showToFewCharsText = false;
+                                    if (this.props.onInputChangeAction && this.props.onInputChangeAction.canExecute) {
+                                        this.props.onInputChangeAction.execute();
+                                    }
+                                } else {
+                                    this.showToFewCharsText = true;
+                                    // update state since it is after timeout
+                                    this.setState({ updateDate: new Date() });
                                 }
                             }
-                            if (enoughCharsFilled) {
-                                this.showToFewCharsText = false;
-                                if (this.props.onInputChangeAction && this.props.onInputChangeAction.canExecute) {
-                                    this.props.onInputChangeAction.execute();
-                                }
-                            } else {
-                                this.showToFewCharsText = true;
-                                // update state since it is after timeout
-                                this.setState({ updateDate: new Date() });
-                            }
-                        }
-                    },
-                    this.props.onInputChangeDelay.value,
-                    timeStamp,
-                    value,
-                    reason
-                );
+                        },
+                        this.props.onInputChangeDelay.value,
+                        timeStamp,
+                        value,
+                        reason
+                    );
 
-                this.loading = true;
+                    this.loading = true;
+                }
             }
         }
         // Bug in library when input value is changed during loading the on open action, the inputvalue is reset after data is returned
         if (event || reason !== "reset") {
+            // reason is reset if options are selected/deleted
+            // So store old value such that it can be set back if needed
+            // Reset value on blur
+            if (this.props.keepFilterValueAfterSelect && this.props.multiple) {
+                if (reason !== "reset" || event.type === "blur") {
+                    this.searchValue = value;
+                }
+            }
             this.setState({ inputValue: value ?? "" });
         }
         // make sure to rerender the widget

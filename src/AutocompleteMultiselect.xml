@@ -82,6 +82,10 @@
                 <caption>No close on select</caption>
                 <description>Whether or not to close the list when an item is selected. Set to true to not close the list when an item is selected.</description>
             </property>
+             <property key="keepFilterValueAfterSelect" type="boolean" required="true" defaultValue="false">
+                <caption>Keep filter value after select</caption>
+                <description>Set to true if you want to keep the filter value after you selected/removed an option.</description>
+            </property>
             <property key="filterSelectedOptions" type="boolean" required="true" defaultValue="false">
                 <caption>Filter selected options</caption>
                 <description>Whether or not to filter the options out of the list that are already selected.</description>

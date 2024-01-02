@@ -160,7 +160,7 @@ export default class AutocompleteMultiselect extends Component {
                                 } else {
                                     if (optionsSelected === null) {
                                         optionsSelected = option;
-                                        inputValueNew = optionTitle ?? "" ;
+                                        inputValueNew = optionTitle ?? "";
                                     } else {
                                         if (!warningGiven) {
                                             console.warn(

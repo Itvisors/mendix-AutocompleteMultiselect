@@ -60,4 +60,4 @@ If you use this property and Search after X chars is set to 0, you might want to
 
 #### Known issues
 - Loading indicator keeps showing: Make sure you refresh the object in the on open action and on input change. This is needed since in some cases the option list won't change. Refreshing the object lets the widget know it is done loading.
-- Options do not refresh when refresh set to tru: Make sure you refresh the context object and this context object is used in your datasource.
+- Options do not refresh when refresh set to true: Make sure you refresh the context object and this context object is used in your datasource.

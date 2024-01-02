@@ -55,6 +55,7 @@ export default class AutocompleteMultiselect extends Component {
                     // if data needs to be refreshed, reset defaults
                     if (this.refreshData) {
                         const defaultValue = dataParsed.filter(option => option.default);
+                        this.props.searchValue.setValue("");
                         if (this.props.multiple) {
                             this.optionsSelected = defaultValue;
                         } else {
@@ -112,7 +113,7 @@ export default class AutocompleteMultiselect extends Component {
                     this.loading = false;
                 }
             }
-        } else if (this.refreshData || this.props.dataSourceOptions !== prevProps.dataSourceOptions) {
+        } else if (this.props.dataSourceOptions !== prevProps.dataSourceOptions) {
             // Check if the datasource has been loaded
             if (this.props.dataSourceOptions.status === "available") {
                 // If the items have been changed or if date needs to be refreshed, change the options

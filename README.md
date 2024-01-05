@@ -6,6 +6,7 @@ Widget that can be used to select one or many options from a dropdown. The user 
 - Use as single select
 - User can search easily for the correct option
 - Limit the tags to show in the front-end
+- Keep filter value after select
 - Styling options
 - Load data only after opening the dropdown
 - Load data only after filling in x chars
@@ -32,6 +33,7 @@ The widget needs a context object to work to be able to store the response. You 
 
 ### Behavior
 - No close on select: Whether or not to close the list when an item is selected. Set to true to not close the list when an item is selected.
+- Keep filter value after select: Set to true if you want to keep the filter value after you selected/removed an option.
 - Filter selected options: Whether or not to filter the options out of the list that are already selected.
 - Limit Tags: Maximum number of selected tags to show if the dropdown is closed. If more options are selected, there will be an indication how many options are selected (e.g. +2) If set to 0, there is no limit.
 

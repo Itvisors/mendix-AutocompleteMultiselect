@@ -1,7 +1,7 @@
 {
   "name": "autocompletemultiselect",
   "widgetName": "AutocompleteMultiselect",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Auto complete widget where multiple options can be selected. Based on https://material-ui.com/components/autocomplete/",
   "copyright": "ITvisors (2020)",
   "author": "Johan Munneke",

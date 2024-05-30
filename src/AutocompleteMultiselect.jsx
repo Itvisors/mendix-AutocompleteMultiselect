@@ -55,7 +55,9 @@ export default class AutocompleteMultiselect extends Component {
                     // if data needs to be refreshed, reset defaults
                     if (this.refreshData) {
                         const defaultValue = dataParsed.filter(option => option.default);
-                        this.props.searchValue.setValue("");
+                        if (this.props.searchValue) {
+                            this.props.searchValue.setValue("");
+                        }
                         if (this.props.multiple) {
                             this.optionsSelected = defaultValue;
                         } else {
@@ -340,7 +342,6 @@ export default class AutocompleteMultiselect extends Component {
         let disabled = this.props.editable ? !this.props.editable.value : false;
         // Check if user has rights on response attribute
         if (!disabled && this.props.responseAttribute.readOnly) {
-            console.warn("Autocomplete Multiselect: User has no rights to change the response attribute.");
             disabled = true;
         }
 

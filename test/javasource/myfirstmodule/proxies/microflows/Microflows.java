@@ -4,155 +4,416 @@
 
 package myfirstmodule.proxies.microflows;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
-public class Microflows
+public final class Microflows
 {
 	/**
-	 * @deprecated
-	 * The default constructor of the Microflows class should not be used.
-	 * Use the static microflow invocation methods instead.
+	 * Private constructor to prevent instantiation of this class. 
 	 */
-	@java.lang.Deprecated(since = "9.12", forRemoval = true)
-	public Microflows() {}
+	private Microflows() {}
 
 	// These are the microflows for the MyFirstModule module
-	public static void aCT_AutocompleteHelper_CustomSearch(IContext context, myfirstmodule.proxies.AutocompleteHelper _autocompleteHelper, myfirstmodule.proxies.Collection _collection)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_AutocompleteHelper_CustomSearchBuilder(
+		myfirstmodule.proxies.AutocompleteHelper _autocompleteHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("AutocompleteHelper", _autocompleteHelper == null ? null : _autocompleteHelper.getMendixObject());
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_AutocompleteHelper_CustomSearch").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_AutocompleteHelper_CustomSearch");
+		builder = builder.withParam("AutocompleteHelper", _autocompleteHelper);
+		builder = builder.withParam("Collection", _collection);
+		return builder;
 	}
-	public static void aCT_AutocompleteHelper_FillJSON(IContext context, myfirstmodule.proxies.AutocompleteHelper _autocompletHelper, myfirstmodule.proxies.Collection _collection)
+
+	public static void aCT_AutocompleteHelper_CustomSearch(
+		IContext context,
+		myfirstmodule.proxies.AutocompleteHelper _autocompleteHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("AutocompletHelper", _autocompletHelper == null ? null : _autocompletHelper.getMendixObject());
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_AutocompleteHelper_FillJSON").withParams(params).execute(context);
+		aCT_AutocompleteHelper_CustomSearchBuilder(
+				_autocompleteHelper,
+				_collection
+			)
+			.execute(context);
 	}
-	public static void aCT_Book_DeleteForDSAttribute(IContext context, myfirstmodule.proxies.Book _book, myfirstmodule.proxies.Collection _collection)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_AutocompleteHelper_FillJSONBuilder(
+		myfirstmodule.proxies.AutocompleteHelper _autocompletHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Book", _book == null ? null : _book.getMendixObject());
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Book_DeleteForDSAttribute").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_AutocompleteHelper_FillJSON");
+		builder = builder.withParam("AutocompletHelper", _autocompletHelper);
+		builder = builder.withParam("Collection", _collection);
+		return builder;
 	}
-	public static void aCT_Book_Save(IContext context, myfirstmodule.proxies.Book _book)
+
+	public static void aCT_AutocompleteHelper_FillJSON(
+		IContext context,
+		myfirstmodule.proxies.AutocompleteHelper _autocompletHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Book", _book == null ? null : _book.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Book_Save").withParams(params).execute(context);
+		aCT_AutocompleteHelper_FillJSONBuilder(
+				_autocompletHelper,
+				_collection
+			)
+			.execute(context);
 	}
-	public static void aCT_Book_SaveAndReset(IContext context, myfirstmodule.proxies.Book _book)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Book_DeleteForDSAttributeBuilder(
+		myfirstmodule.proxies.Book _book,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Book", _book == null ? null : _book.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Book_SaveAndReset").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_Book_DeleteForDSAttribute");
+		builder = builder.withParam("Book", _book);
+		builder = builder.withParam("Collection", _collection);
+		return builder;
 	}
-	public static void aCT_Collection_MapIntKey(IContext context, myfirstmodule.proxies.Collection _collection)
+
+	public static void aCT_Book_DeleteForDSAttribute(
+		IContext context,
+		myfirstmodule.proxies.Book _book,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Collection_MapIntKey").withParams(params).execute(context);
+		aCT_Book_DeleteForDSAttributeBuilder(
+				_book,
+				_collection
+			)
+			.execute(context);
 	}
-	public static void aCT_Collection_MapStringKey(IContext context, myfirstmodule.proxies.Collection _collection)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Book_SaveBuilder(
+		myfirstmodule.proxies.Book _book
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Collection_MapStringKey").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_Book_Save");
+		builder = builder.withParam("Book", _book);
+		return builder;
 	}
-	public static void aCT_Collection_OpenDefaultStringAdvanced(IContext context, myfirstmodule.proxies.Collection _collection)
+
+	public static void aCT_Book_Save(
+		IContext context,
+		myfirstmodule.proxies.Book _book
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Collection_OpenDefaultStringAdvanced").withParams(params).execute(context);
+		aCT_Book_SaveBuilder(
+				_book
+			)
+			.execute(context);
 	}
-	public static void aCT_Collection_Reset(IContext context, myfirstmodule.proxies.Collection _collection)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Book_SaveAndResetBuilder(
+		myfirstmodule.proxies.Book _book
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Collection_Reset").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_Book_SaveAndReset");
+		builder = builder.withParam("Book", _book);
+		return builder;
 	}
-	public static void aCT_Collection_Save(IContext context, myfirstmodule.proxies.Collection _collection)
+
+	public static void aCT_Book_SaveAndReset(
+		IContext context,
+		myfirstmodule.proxies.Book _book
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Collection_Save").withParams(params).execute(context);
+		aCT_Book_SaveAndResetBuilder(
+				_book
+			)
+			.execute(context);
 	}
-	public static void aCT_Collection_Save_SingleSelect(IContext context, myfirstmodule.proxies.Collection _collection)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Collection_MapIntKeyBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_Collection_Save_SingleSelect").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_Collection_MapIntKey");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
 	}
-	public static myfirstmodule.proxies.AutocompleteHelper dS_Collection_GetAutoCompleteHelperAndFillInput(IContext context, myfirstmodule.proxies.Collection _collection)
+
+	public static void aCT_Collection_MapIntKey(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.DS_Collection_GetAutoCompleteHelperAndFillInput").withParams(params).execute(context);
-		return result == null ? null : myfirstmodule.proxies.AutocompleteHelper.initialize(context, result);
+		aCT_Collection_MapIntKeyBuilder(
+				_collection
+			)
+			.execute(context);
 	}
-	public static myfirstmodule.proxies.AutocompleteHelper dS_Collection_GetAutoCompleteHelperAndGetDefaults(IContext context, myfirstmodule.proxies.Collection _collection)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Collection_MapStringKeyBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.DS_Collection_GetAutoCompleteHelperAndGetDefaults").withParams(params).execute(context);
-		return result == null ? null : myfirstmodule.proxies.AutocompleteHelper.initialize(context, result);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_Collection_MapStringKey");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
 	}
-	public static java.util.List<myfirstmodule.proxies.Book> dS_Collection_GetBooks(IContext context, myfirstmodule.proxies.Collection _collection)
+
+	public static void aCT_Collection_MapStringKey(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		java.util.List<IMendixObject> objs = Core.microflowCall("MyFirstModule.DS_Collection_GetBooks").withParams(params).execute(context);
-		if (objs == null) {
-			return null;
-		} else {
-			return objs.stream()
-				.map(obj -> myfirstmodule.proxies.Book.initialize(context, obj))
-				.collect(java.util.stream.Collectors.toList());
-		}
+		aCT_Collection_MapStringKeyBuilder(
+				_collection
+			)
+			.execute(context);
 	}
-	public static myfirstmodule.proxies.AutocompleteHelper dS_Collection_GetOrCreateAutoCompleteHelper(IContext context, myfirstmodule.proxies.Collection _collection)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Collection_OpenDefaultStringAdvancedBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.DS_Collection_GetOrCreateAutoCompleteHelper").withParams(params).execute(context);
-		return result == null ? null : myfirstmodule.proxies.AutocompleteHelper.initialize(context, result);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_Collection_OpenDefaultStringAdvanced");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
 	}
-	public static void oCH_Collection_Refresh(IContext context, myfirstmodule.proxies.Collection _collection)
+
+	public static void aCT_Collection_OpenDefaultStringAdvanced(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.OCH_Collection_Refresh").withParams(params).execute(context);
+		aCT_Collection_OpenDefaultStringAdvancedBuilder(
+				_collection
+			)
+			.execute(context);
 	}
-	public static void oCH_Collection_SetSelectedBooks(IContext context, myfirstmodule.proxies.Collection _collection)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Collection_ResetBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.OCH_Collection_SetSelectedBooks").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_Collection_Reset");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
 	}
-	public static void sUB_AutocompleteHelper_FillJSONWithDefaults(IContext context, myfirstmodule.proxies.AutocompleteHelper _autocompletHelper, myfirstmodule.proxies.Collection _collection)
+
+	public static void aCT_Collection_Reset(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("AutocompletHelper", _autocompletHelper == null ? null : _autocompletHelper.getMendixObject());
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.SUB_AutocompleteHelper_FillJSONWithDefaults").withParams(params).execute(context);
+		aCT_Collection_ResetBuilder(
+				_collection
+			)
+			.execute(context);
 	}
-	public static void sUB_Collection_RefreshJSON(IContext context, myfirstmodule.proxies.Collection _collection)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Collection_SaveBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.SUB_Collection_RefreshJSON").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_Collection_Save");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
 	}
-	public static void sUB_Collection_SetDefaultString(IContext context, myfirstmodule.proxies.Collection _collection)
+
+	public static void aCT_Collection_Save(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Collection", _collection == null ? null : _collection.getMendixObject());
-		Core.microflowCall("MyFirstModule.SUB_Collection_SetDefaultString").withParams(params).execute(context);
+		aCT_Collection_SaveBuilder(
+				_collection
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Collection_Save_SingleSelectBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_Collection_Save_SingleSelect");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static void aCT_Collection_Save_SingleSelect(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		aCT_Collection_Save_SingleSelectBuilder(
+				_collection
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder dS_Collection_GetAutoCompleteHelperAndFillInputBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.DS_Collection_GetAutoCompleteHelperAndFillInput");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static myfirstmodule.proxies.AutocompleteHelper dS_Collection_GetAutoCompleteHelperAndFillInput(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		Object result = dS_Collection_GetAutoCompleteHelperAndFillInputBuilder(
+				_collection
+			)
+			.execute(context);
+		return result == null ? null : myfirstmodule.proxies.AutocompleteHelper.initialize(context, (IMendixObject) result);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder dS_Collection_GetAutoCompleteHelperAndGetDefaultsBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.DS_Collection_GetAutoCompleteHelperAndGetDefaults");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static myfirstmodule.proxies.AutocompleteHelper dS_Collection_GetAutoCompleteHelperAndGetDefaults(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		Object result = dS_Collection_GetAutoCompleteHelperAndGetDefaultsBuilder(
+				_collection
+			)
+			.execute(context);
+		return result == null ? null : myfirstmodule.proxies.AutocompleteHelper.initialize(context, (IMendixObject) result);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder dS_Collection_GetBooksBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.DS_Collection_GetBooks");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static java.util.List<myfirstmodule.proxies.Book> dS_Collection_GetBooks(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		Object result = dS_Collection_GetBooksBuilder(
+				_collection
+			)
+			.execute(context);
+		return result == null ? null : com.mendix.utils.ListUtils.map((java.util.List<IMendixObject>) result, obj -> myfirstmodule.proxies.Book.initialize(context, obj));
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder dS_Collection_GetOrCreateAutoCompleteHelperBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.DS_Collection_GetOrCreateAutoCompleteHelper");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static myfirstmodule.proxies.AutocompleteHelper dS_Collection_GetOrCreateAutoCompleteHelper(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		Object result = dS_Collection_GetOrCreateAutoCompleteHelperBuilder(
+				_collection
+			)
+			.execute(context);
+		return result == null ? null : myfirstmodule.proxies.AutocompleteHelper.initialize(context, (IMendixObject) result);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder oCH_Collection_RefreshBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.OCH_Collection_Refresh");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static void oCH_Collection_Refresh(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		oCH_Collection_RefreshBuilder(
+				_collection
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder oCH_Collection_SetSelectedBooksBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.OCH_Collection_SetSelectedBooks");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static void oCH_Collection_SetSelectedBooks(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		oCH_Collection_SetSelectedBooksBuilder(
+				_collection
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder sUB_AutocompleteHelper_FillJSONWithDefaultsBuilder(
+		myfirstmodule.proxies.AutocompleteHelper _autocompletHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.SUB_AutocompleteHelper_FillJSONWithDefaults");
+		builder = builder.withParam("AutocompletHelper", _autocompletHelper);
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static void sUB_AutocompleteHelper_FillJSONWithDefaults(
+		IContext context,
+		myfirstmodule.proxies.AutocompleteHelper _autocompletHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		sUB_AutocompleteHelper_FillJSONWithDefaultsBuilder(
+				_autocompletHelper,
+				_collection
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder sUB_Collection_RefreshJSONBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.SUB_Collection_RefreshJSON");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static void sUB_Collection_RefreshJSON(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		sUB_Collection_RefreshJSONBuilder(
+				_collection
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder sUB_Collection_SetDefaultStringBuilder(
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.SUB_Collection_SetDefaultString");
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static void sUB_Collection_SetDefaultString(
+		IContext context,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		sUB_Collection_SetDefaultStringBuilder(
+				_collection
+			)
+			.execute(context);
 	}
 }

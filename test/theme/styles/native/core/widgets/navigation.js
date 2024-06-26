@@ -1,4 +1,4 @@
-import { border, font, navigation, spacing } from "../variables";
+import { font, navigation, spacing } from "../variables";
 /*
 
 DISCLAIMER:
@@ -7,9 +7,9 @@ Customizing core files will make updating Atlas much more difficult in the futur
 To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
 ==========================================================================
-    TopBar / BottomBar / ProgressOverlay
+    BottomBar / ProgressOverlay
 
-    Default Class For Mendix TopBar, BottomBar and ProgressOverlay
+    Default Class For Mendix BottomBar and ProgressOverlay
 ========================================================================== */
 export const navigationStyle = {
     bottomBar: {
@@ -50,11 +50,11 @@ export const navigationStyle = {
             backgroundColor: navigation.progressOverlay.containerBackgroundColor,
             paddingHorizontal: spacing.largest,
             paddingVertical: spacing.large,
-            borderRadius: border.radius,
-            elevation: 1.5,
+            borderRadius: navigation.progressOverlay.borderRadius,
+            elevation: navigation.progressOverlay.elevation,
             shadowColor: navigation.progressOverlay.shadowColor,
-            shadowOpacity: 0.1,
-            shadowRadius: 10,
+            shadowOpacity: navigation.progressOverlay.shadowOpacity,
+            shadowRadius: navigation.progressOverlay.shadowRadius,
             shadowOffset: {
                 width: 0,
                 height: 2,

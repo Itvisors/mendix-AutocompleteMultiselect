@@ -1,10 +1,9 @@
-$dg-hover-color: #f8f8f8;
-$dg-background-color: #fff;
-$dg-selected-color: #dadcde;
-$dg-border-color: #ced0d3;
-$dg-spacing-small: 8px;
+$hover-color: #f8f8f8 !default;
+$background-color: #fff !default;
+$selected-color: #dadcde !default;
+$border-color: #ced0d3 !default;
 $arrow: "resources/dropdown-arrow.svg";
-$dg-item-min-height: 32px;
+$item-min-height: 32px;
 
 @import "date-picker";
 
@@ -64,9 +63,9 @@ $dg-item-min-height: 32px;
             position: absolute;
             width: max-content;
             left: 0;
-            margin: 0 var(--spacing-small, $dg-spacing-small);
+            margin: 0 $spacing-small;
             padding: 0;
-            background: var(--bg-color-secondary, $dg-background-color);
+            background: $background-color;
             z-index: 102;
             border-radius: 8px;
             list-style-type: none;
@@ -86,13 +85,13 @@ $dg-item-min-height: 32px;
                 }
 
                 &.filter-selected {
-                    background-color: var(--gray-lighter, $dg-hover-color);
-                    color: var(--brand-primary, $brand-primary);
+                    background-color: $hover-color;
+                    color: $brand-primary;
                 }
 
                 &:hover,
                 &:focus {
-                    background-color: var(--gray-lighter, $dg-hover-color);
+                    background-color: $hover-color;
                 }
             }
         }
@@ -101,7 +100,7 @@ $dg-item-min-height: 32px;
 
 .filter-selectors {
     padding: 0;
-    background: var(--bg-color-secondary, $dg-background-color);
+    background: $background-color;
     border-radius: 8px;
     list-style-type: none;
     box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
@@ -120,13 +119,13 @@ $dg-item-min-height: 32px;
         }
 
         &.filter-selected {
-            background-color: var(--gray-lighter, $dg-hover-color);
-            color: var(--brand-primary, $brand-primary);
+            background-color: $hover-color;
+            color: $brand-primary;
         }
 
         &:hover,
         &:focus {
-            background-color: var(--gray-lighter, $dg-hover-color);
+            background-color: $hover-color;
         }
     }
 }
@@ -140,9 +139,9 @@ $dg-item-min-height: 32px;
         display: flex;
         align-items: center;
         font-weight: normal;
-        min-height: var(--spacing-larger, $dg-item-min-height);
+        min-height: $item-min-height;
         cursor: pointer;
-        padding: 0 var(--spacing-small, $dg-spacing-small);
+        padding: 0 $spacing-small;
 
         .filter-label {
             overflow: hidden;
@@ -151,13 +150,13 @@ $dg-item-min-height: 32px;
         }
 
         &.filter-selected {
-            background-color: var(--gray-lighter, $dg-hover-color);
-            color: var(--brand-primary, $brand-primary);
+            background-color: $hover-color;
+            color: $brand-primary;
         }
 
         &:hover,
         &:focus {
-            background-color: var(--gray-lighter, $dg-hover-color);
+            background-color: $hover-color;
         }
 
         label {
@@ -172,33 +171,38 @@ $dg-item-min-height: 32px;
 }
 
 :not(.dropdown-content) > .dropdown-list {
-    background: var(--bg-color-secondary, $dg-background-color);
+    background: $background-color;
     border-radius: 8px;
     box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
+    overflow-x: hidden;
     max-height: 40vh;
     z-index: 102;
 }
 
 .dropdown-content {
-    background: var(--bg-color-secondary, $dg-background-color);
+    background: $background-color;
     border-radius: 8px;
     box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
+    overflow-x: hidden;
     max-height: 40vh;
     z-index: 140;
+
+    &-section + &-section {
+        border-top: 1px solid $form-input-border-color;
+    }
 }
 
 .dropdown-footer {
     position: sticky;
     bottom: 0;
     background: inherit;
-    z-index: 50;
 }
 
 .dropdown-footer-item {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    padding: 0 var(--spacing-small, $dg-spacing-small);
+    padding: 0 $spacing-small;
     min-height: 40px;
 }
 
@@ -209,7 +213,6 @@ $dg-item-min-height: 32px;
 
 .dropdown-container {
     flex: 1;
-    position: relative;
 
     .dropdown-triggerer {
         caret-color: transparent;
@@ -226,10 +229,12 @@ $dg-item-min-height: 32px;
     }
 
     .dropdown-list {
+        position: absolute;
+        width: max-content;
         left: 0;
-        margin: 0 var(--spacing-small, $dg-spacing-small);
+        margin: 0 $spacing-small;
         padding: 0;
-        background: var(--bg-color-secondary, $dg-background-color);
+        background: $background-color;
         z-index: 102;
         border-radius: 8px;
         list-style-type: none;
@@ -241,9 +246,9 @@ $dg-item-min-height: 32px;
             display: flex;
             align-items: center;
             font-weight: normal;
-            min-height: var(--spacing-larger, $dg-item-min-height);
+            min-height: $item-min-height;
             cursor: pointer;
-            padding: 0 var(--spacing-small, $dg-spacing-small);
+            padding: 0 $spacing-small;
 
             .filter-label {
                 overflow: hidden;
@@ -252,13 +257,13 @@ $dg-item-min-height: 32px;
             }
 
             &.filter-selected {
-                background-color: var(--gray-lighter, $dg-hover-color);
-                color: var(--brand-primary, $brand-primary);
+                background-color: $hover-color;
+                color: $brand-primary;
             }
 
             &:hover,
             &:focus {
-                background-color: var(--gray-lighter, $dg-hover-color);
+                background-color: $hover-color;
             }
 
             label {
@@ -271,6 +276,10 @@ $dg-item-min-height: 32px;
             }
         }
     }
+}
+
+.date-filter-container {
+    z-index: 102;
 }
 
 /**
@@ -342,13 +351,13 @@ div:not(.table-compact) > .table {
     .th {
         .filter-selector {
             .filter-selectors {
-                margin: 0;
+                margin: 0 $spacing-medium;
             }
         }
 
         .dropdown-container {
             .dropdown-list {
-                margin: 0;
+                margin: 0 $spacing-medium;
             }
         }
     }

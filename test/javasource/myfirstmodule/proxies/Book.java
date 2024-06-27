@@ -24,6 +24,7 @@ public class Book implements com.mendix.systemwideinterfaces.core.IEntityProxy
 		Selected("Selected"),
 		KeyString("KeyString"),
 		KeyInteger("KeyInteger"),
+		Group("Group"),
 		Book_Collection("MyFirstModule.Book_Collection");
 
 		private final java.lang.String metaName;
@@ -227,6 +228,42 @@ public class Book implements com.mendix.systemwideinterfaces.core.IEntityProxy
 	public final void setKeyInteger(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer keyinteger)
 	{
 		getMendixObject().setValue(context, MemberNames.KeyInteger.toString(), keyinteger);
+	}
+
+	/**
+	 * @return value of Group
+	 */
+	public final java.lang.String getGroup()
+	{
+		return getGroup(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of Group
+	 */
+	public final java.lang.String getGroup(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Group.toString());
+	}
+
+	/**
+	 * Set value of Group
+	 * @param group
+	 */
+	public final void setGroup(java.lang.String group)
+	{
+		setGroup(getContext(), group);
+	}
+
+	/**
+	 * Set value of Group
+	 * @param context
+	 * @param group
+	 */
+	public final void setGroup(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String group)
+	{
+		getMendixObject().setValue(context, MemberNames.Group.toString(), group);
 	}
 
 	/**

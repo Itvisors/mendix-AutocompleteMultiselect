@@ -51,6 +51,13 @@ export default class AutocompleteMultiselect extends Component {
                     // parse the json
                     if (this.props.JSONAttribute.value && this.props.JSONAttribute.value !== "") {
                         dataParsed = JSON.parse(this.props.JSONAttribute.value);
+                        if (this.props.enableGrouping) {
+                            dataParsed.forEach(item => {
+                                if (!item.group) {
+                                    item.group = "";
+                                }
+                            });
+                        }
                     }
                     // if data needs to be refreshed, reset defaults
                     if (this.refreshData) {
@@ -132,6 +139,9 @@ export default class AutocompleteMultiselect extends Component {
                         //If key is used, add key to the option
                         if (this.props.keyAttr) {
                             option.key = this.props.keyAttr.get(item).value;
+                        }
+                        if (this.props.enableGrouping && this.props.groupAttr) {
+                            option.group = this.props.groupAttr.get(item).value;
                         }
                         // If data needs to be refreshed, get default options
                         if (this.refreshData) {
@@ -396,6 +406,8 @@ export default class AutocompleteMultiselect extends Component {
                 loadingText={loadingText}
                 onInputChange={this.onInputChange}
                 inputValue={this.state.inputValue}
+                enableGrouping={this.props.enableGrouping}
+                sortGroups={this.props.sortGroups}
             />
         );
     }

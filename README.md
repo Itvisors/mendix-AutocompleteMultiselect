@@ -10,6 +10,7 @@ Widget that can be used to select one or many options from a dropdown. The user 
 - Styling options
 - Load data only after opening the dropdown
 - Load data only after filling in x chars
+- Group options
 
 ## Usage
 The widget needs a context object to work to be able to store the response. You can choose to make this object non-persistent. Configure the data source to retrieve the options to show in the dropdown and select which attribute can be used as title. If you want some options to be selected when rendering the widget, also choose the attribute that can be used for the default selection property. Sometimes you need the options to be non-persistent, e.g. when the default selected attribute is user specific and can therefore not be stored in the database. After these options are configured, the onchange event can be setup when needed and other options can be set that influence the behavior and layout of the widget. When the value(s) in the dropdown are changed, the response attribute is set and can be used to do what you want, e.g. set an association. If "No close on select" is set to true, the onchange action is triggered many times in a short time and can interfere. Therefore it is adviced in this case to map the response only when needed, e.g. when hitting save.
@@ -21,6 +22,7 @@ The widget needs a context object to work to be able to store the response. You 
 - Data source: Should return the options to be rendered.
 - Title: The attribute that is used to show as dropdown option. Should be unique to be able to make a distinction between the items.
 - Key: Attribute where the key is stored. This key is only used in the response and can be used when the title does not suffice to find the object in mendix. The new JSON will be for example [{"title":"example1", "key":"1234"}] for multiselect when a string key is used.
+- Group: Optional: can be used to group options together. Make sure to set "Enable Grouping" to true  in the behavior tab.
 - Default selected: Boolean attribute where is stored whether this option should be selected by default when loading the widget for the first time.
 - Default selected string: **Advanced,** Can be used instead of Default selected. If this one is used, the default selected property is ignored. This property links to a string where the default selected titles are stored in the json format ["title1","title2"]. This option can be used when the default attribute cannot be stored in the database and you do not want to create a list of non-persistent entities to be used in the dropdown.
 - Multi-select: If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select.
@@ -36,6 +38,8 @@ The widget needs a context object to work to be able to store the response. You 
 - Keep filter value after select: Set to true if you want to keep the filter value after you selected/removed an option.
 - Filter selected options: Whether or not to filter the options out of the list that are already selected.
 - Limit Tags: Maximum number of selected tags to show if the dropdown is closed. If more options are selected, there will be an indication how many options are selected (e.g. +2) If set to 0, there is no limit.
+- Enable Grouping: If grouping is enabled, you can add Group in general to specify the group or add "group":"string" to the json.
+- Sort Groups: If grouping is enabled, you can use this option to sort the options based on the groups (a-z). If you don't use this, make sure you sort the options in the datasource to prevent duplicate groups.
 
 ### Layout
 - No Options: Text to show when no options found.

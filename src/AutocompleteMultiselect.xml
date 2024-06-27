@@ -35,6 +35,11 @@
                     <attributeType name="AutoNumber"/>
                 </attributeTypes>
             </property>
+            <property key="groupAttr" type="expression" dataSource="dataSourceOptions" required="false">
+                <caption>Group</caption>
+                <description>Optional: can be used to group options together. Make sure to set "Enable Grouping" to true in the behavior tab.</description>
+                <returnType type="String" />
+            </property>
             <property key="defaultSelectedAttr" type="attribute" dataSource="dataSourceOptions" required="false">
                 <caption>Default selected</caption>
                 <description>Boolean attribute where is stored whether this option should be selected by default when loading the widget for the first time</description>
@@ -93,6 +98,14 @@
             <property key="limitTags" type="integer" required="true" defaultValue="0">
                 <caption>Limit Tags</caption>
                 <description>Maximum number of selected tags to show if the dropdown is closed. If more options are selected, there will be an indication how many options are selected (e.g. +2) If set to 0, there is no limit.</description>
+            </property>
+            <property key="enableGrouping" type="boolean" required="true" defaultValue="false">
+                <caption>Enable Grouping</caption>
+                <description>If grouping is enabled, you can add Group in general to specify the group or add "group":"string" to the json.</description>
+            </property>
+            <property key="sortGroups" type="boolean" required="true" defaultValue="true">
+                <caption>Sort Groups</caption>
+                <description>If grouping is enabled, you can use this option to sort the options based on the groups (a-z). If you don't use this, make sure you sort the options in the datasource to prevent duplicate groups.</description>
             </property>
         </propertyGroup>
 

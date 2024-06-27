@@ -1,7 +1,7 @@
 import { Component, Fragment, createElement } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
+import TextField from "@material-ui/core/TextField";
 
 export class AutocompleteUI extends Component {
     render() {
@@ -14,7 +14,22 @@ export class AutocompleteUI extends Component {
                 disabled={this.props.disabled}
                 filterSelectedOptions={this.props.filterSelectedOptions}
                 disableCloseOnSelect={this.props.disableCloseOnSelect}
-                options={this.props.options}
+                options={
+                    this.props.sortGroups
+                        ? this.props.options.sort((a, b) => {
+                              if (!a.group && !b.group) {
+                                  return 0;
+                              }
+                              if (!a.group) {
+                                  return 1;
+                              }
+                              if (!b.group) {
+                                  return -1;
+                              }
+                              return a.group.localeCompare(b.group);
+                          })
+                        : this.props.options
+                }
                 value={this.props.value}
                 getOptionLabel={option => option.title}
                 onChange={this.props.onChange}
@@ -25,6 +40,7 @@ export class AutocompleteUI extends Component {
                 loadingText={this.props.loadingText}
                 onInputChange={this.props.onInputChange}
                 getOptionSelected={(option, value) => option.title === value.title && option.key === value.key}
+                groupBy={this.props.enableGrouping ? option => option.group : undefined}
                 renderOption={(option, { selected }) => (
                     <Fragment>
                         {this.props.showCheckboxes ? <Checkbox checked={selected} /> : null}

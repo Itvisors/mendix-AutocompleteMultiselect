@@ -62,6 +62,52 @@ public final class Microflows
 			)
 			.execute(context);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_AutocompleteHelper_FillJSON_WithGroupsBuilder(
+		myfirstmodule.proxies.AutocompleteHelper _autocompletHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_AutocompleteHelper_FillJSON_WithGroups");
+		builder = builder.withParam("AutocompletHelper", _autocompletHelper);
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static void aCT_AutocompleteHelper_FillJSON_WithGroups(
+		IContext context,
+		myfirstmodule.proxies.AutocompleteHelper _autocompletHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		aCT_AutocompleteHelper_FillJSON_WithGroupsBuilder(
+				_autocompletHelper,
+				_collection
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_AutocompleteHelper_FillJSON_WithGroupsSortedBuilder(
+		myfirstmodule.proxies.AutocompleteHelper _autocompletHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_AutocompleteHelper_FillJSON_WithGroupsSorted");
+		builder = builder.withParam("AutocompletHelper", _autocompletHelper);
+		builder = builder.withParam("Collection", _collection);
+		return builder;
+	}
+
+	public static void aCT_AutocompleteHelper_FillJSON_WithGroupsSorted(
+		IContext context,
+		myfirstmodule.proxies.AutocompleteHelper _autocompletHelper,
+		myfirstmodule.proxies.Collection _collection
+	)
+	{
+		aCT_AutocompleteHelper_FillJSON_WithGroupsSortedBuilder(
+				_autocompletHelper,
+				_collection
+			)
+			.execute(context);
+	}
 	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_Book_DeleteForDSAttributeBuilder(
 		myfirstmodule.proxies.Book _book,
 		myfirstmodule.proxies.Collection _collection
@@ -316,6 +362,25 @@ public final class Microflows
 			)
 			.execute(context);
 		return result == null ? null : myfirstmodule.proxies.AutocompleteHelper.initialize(context, (IMendixObject) result);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder microflowBuilder(
+		myfirstmodule.proxies.Book _book
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.Microflow");
+		builder = builder.withParam("Book", _book);
+		return builder;
+	}
+
+	public static void microflow(
+		IContext context,
+		myfirstmodule.proxies.Book _book
+	)
+	{
+		microflowBuilder(
+				_book
+			)
+			.execute(context);
 	}
 	public static com.mendix.core.actionmanagement.MicroflowCallBuilder oCH_Collection_RefreshBuilder(
 		myfirstmodule.proxies.Collection _collection

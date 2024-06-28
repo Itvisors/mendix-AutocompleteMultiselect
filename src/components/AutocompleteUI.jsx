@@ -15,7 +15,7 @@ export class AutocompleteUI extends Component {
                 filterSelectedOptions={this.props.filterSelectedOptions}
                 disableCloseOnSelect={this.props.disableCloseOnSelect}
                 options={
-                    this.props.sortGroups
+                    this.props.sortGroups && this.props.enableGrouping
                         ? this.props.options.sort((a, b) => {
                               if (!a.group && !b.group) {
                                   return 0;

@@ -1,7 +1,7 @@
 import { Component, Fragment, createElement } from "react";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import Checkbox from "@material-ui/core/Checkbox";
-import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import Checkbox from "@mui/material/Checkbox";
+import TextField from "@mui/material/TextField";
 
 export class AutocompleteUI extends Component {
     render() {
@@ -39,13 +39,13 @@ export class AutocompleteUI extends Component {
                 loading={this.props.loading}
                 loadingText={this.props.loadingText}
                 onInputChange={this.props.onInputChange}
-                getOptionSelected={(option, value) => option.title === value.title && option.key === value.key}
+                isOptionEqualToValue={(option, value) => option.title === value.title && option.key === value.key}
                 groupBy={this.props.enableGrouping ? option => option.group : undefined}
-                renderOption={(option, { selected }) => (
-                    <Fragment>
+                renderOption={(props, option, { selected }) => (
+                    <li {...props}>
                         {this.props.showCheckboxes ? <Checkbox checked={selected} /> : null}
                         {option.title}
-                    </Fragment>
+                    </li>
                 )}
                 renderInput={params => (
                     <TextField

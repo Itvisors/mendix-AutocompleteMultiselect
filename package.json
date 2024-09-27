@@ -25,11 +25,12 @@
     "release": "pluggable-widgets-tools release:web"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^10.7.1"
+    "@mendix/pluggable-widgets-tools": "^10.15.0"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.4",
-    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.1",
     "classnames": "^2.2.6"
   },
   "resolutions": {
@@ -37,7 +38,7 @@
     "react-native": "0.72.7"
   },
   "overrides": {
-    "react": "18.2.0",
+    "react": "^18.2.0",
     "react-native": "0.72.7"
   }
 }

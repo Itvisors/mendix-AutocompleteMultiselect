@@ -222,7 +222,7 @@ export default class AutocompleteMultiselect extends Component {
      *
      * @param {*} event - the event that triggered this action
      * @param {*} newValue - the new value of the dropdown
-     * @param {*} reason - the reason that this action is triggered, either select-option, remove-option, create-option, blur or clear
+     * @param {*} reason - the reason that this action is triggered, either selectOption, removeOption, createOption, blur or clear
      * @param {*} details - more details about the option for which this event is triggered
      */
     changeValues(event, newValue, reason, details) {
@@ -234,9 +234,10 @@ export default class AutocompleteMultiselect extends Component {
         }
         // Update the widget with the new values selected
         this.optionsSelected = newValue;
-        // If filter value must be kept, restore the value after a value is selected/removed
+        // If filter value must be kept, restore the value after a value is selected/removed. 
+        // The value should only be reset if the filter is cleared.
         if (this.props.keepFilterValueAfterSelect && this.props.multiple) {
-            if (reason !== "blur") {
+            if (reason !== "clear") {
                 this.setState({ inputValue: this.searchValue ?? "" });
             }
         }
@@ -328,11 +329,9 @@ export default class AutocompleteMultiselect extends Component {
         }
         // Bug in library when input value is changed during loading the on open action, the inputvalue is reset after data is returned
         if (event || reason !== "reset") {
-            // reason is reset if options are selected/deleted
-            // So store old value such that it can be set back if needed
-            // Reset value on blur
+            // Store old value such that it can be set back if needed
             if (this.props.keepFilterValueAfterSelect && this.props.multiple) {
-                if (reason !== "reset" || event.type === "blur") {
+                if (reason === "input" || reason === "blur") {
                     this.searchValue = value;
                 }
             }

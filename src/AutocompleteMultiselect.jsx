@@ -234,7 +234,7 @@ export default class AutocompleteMultiselect extends Component {
         }
         // Update the widget with the new values selected
         this.optionsSelected = newValue;
-        // If filter value must be kept, restore the value after a value is selected/removed. 
+        // If filter value must be kept, restore the value after a value is selected/removed.
         // The value should only be reset if the filter is cleared.
         if (this.props.keepFilterValueAfterSelect && this.props.multiple) {
             if (reason !== "clear") {
